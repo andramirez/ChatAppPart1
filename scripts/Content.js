@@ -29,15 +29,12 @@ export class Content extends React.Component {
     const chat = {
       background: 'rgba(190, 190, 190, .75)'
     };
-    const AppStyle = {
-      backgroundImage:'../images/bg.jpg'
-    }
     let msgs = this.state.msgs.map(
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><h1>{n.name}:</h1>{n.msgs}</div>
     );
     
     return (
-      <div className="App" style={AppStyle}>
+      <div className="App">
           <div id="live" className = "small-container">
             <h3>Please Sign In Using Google or Facebook</h3>
           <div 
