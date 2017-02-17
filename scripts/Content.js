@@ -37,7 +37,7 @@ export class Content extends React.Component {
       <div className="App" style={AppStyle}>
           <div id="live" className = "small-container">
             <h3>Please Sign In Using Google or Facebook</h3>
-            <div className="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+            <div className="g-signin2" data-theme="dark"></div>
           <div 
           className="fb-login-button" 
           data-max-rows="1" 
