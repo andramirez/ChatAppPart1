@@ -26,7 +26,7 @@ export class Content extends React.Component {
       backgroundImage:'../images/bg.jpg'
     }
     let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/> {n.name}: {n.msgs}</div>
+            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/>   {n.name}: <p>{n.msgs}</p></div>
     );
     
     return (
