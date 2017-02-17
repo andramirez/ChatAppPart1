@@ -13,7 +13,22 @@ export class Button extends React.Component {
                     response.authResponse.accessToken,
                     'msg': document.getElementById("msg").value,
                 });
-            }    
+            }
+            else {
+                // Button.js, continued
+                let auth=gapi.auth2.getAuthInstance();
+                letuser=auth.currentUser.get();
+                if(user.isSignedIn()){
+                    Socket.emit('new number',{
+                        'google_user_token':user.getAuthResponse().id_token,
+                        'facebook_user_token':'',
+                        'msg': document.getElementById("msg").value,
+                        
+                    });
+                    
+                }
+                
+            }
         });
         document.getElementById("msg").value = "";
     }
