@@ -20,13 +20,17 @@ export class Content extends React.Component {
     const style = {
       border:'.5px solid black', 
       textAlign:'left',
-      padding:'2px'
+      padding:'2px',
+      width: '495px',
+      whitespace: 'nowrap',
+      overflow: 'hidden',
+      textoverflow: 'ellipsis'
     };
     const AppStyle = {
       backgroundImage:'../images/bg.jpg'
     }
     let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/>   {n.name}: {n.msgs}</div>
+            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><h1>{n.name}:</h1>{n.msgs}</div>
     );
     
     return (

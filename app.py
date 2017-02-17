@@ -25,7 +25,7 @@ def on_new_msg(data):
     json=response.json()
     print "Got an event for new msg with data:", data
     all_msgs.append({
-        'name':json['name'],
+        'name':" " + json['name'],
         'picture':json['picture']['data']['url'],
         'msgs':data['msg']
         })
