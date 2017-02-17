@@ -26,6 +26,9 @@ export class Content extends React.Component {
       overflow: 'hidden',
       textoverflow: 'ellipsis'
     };
+    const chat = {
+      background: 'rgba(190, 190, 190, .75)'
+    };
     const AppStyle = {
       backgroundImage:'../images/bg.jpg'
     }
@@ -51,7 +54,7 @@ export class Content extends React.Component {
         </div>
         <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>
-          <div id="chatbox">
+          <div id="chatbox" style={chat}>
             <div id="text">{ msgs }</div>
           </div>
           <Button/>
