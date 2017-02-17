@@ -12,18 +12,27 @@
 }
 #msg{
   margin-left:30px;
+  border-radius: 25px;
+  padding:7px;
 }
 #b1{
   margin:10px;
-  vertical-align:top
+  vertical-align:top;
 }
 #chatbox{
+  border-radius: 25px;
   width: 500px;
   margin-top: 40px;
-  border:solid;
   height:400px;
   overflow: auto;
+  background-color: rgba(190, 190, 190, .75);
 }
 #text{
   padding-top: 1px;
+}
+#welcome{
+  font-size: 30px;
+  font-weight: bold;
+  color:white;
+  margin:auto;
 }

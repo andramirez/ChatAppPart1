@@ -13143,7 +13143,11 @@ var Content = exports.Content = function (_React$Component) {
       var style = {
         border: '.5px solid black',
         textAlign: 'left',
-        padding: '2px'
+        padding: '2px',
+        width: '495px',
+        whitespace: 'nowrap',
+        overflow: 'hidden',
+        textoverflow: 'ellipsis'
       };
       var AppStyle = {
         backgroundImage: '../images/bg.jpg'
@@ -13153,8 +13157,12 @@ var Content = exports.Content = function (_React$Component) {
           'div',
           { key: index, style: style, id: 'text1' },
           React.createElement('img', { src: n.picture }),
-          n.name,
-          ': ',
+          React.createElement(
+            'h1',
+            null,
+            n.name,
+            ':'
+          ),
           n.msgs
         );
       });
@@ -13170,20 +13178,22 @@ var Content = exports.Content = function (_React$Component) {
             null,
             'Please Sign In Using Google or Facebook'
           ),
-          React.createElement('div', { className: 'g-signin2', 'data-onsuccess': 'onSignIn', 'data-theme': 'dark' }),
           React.createElement('div', {
             className: 'fb-login-button',
             'data-max-rows': '1',
             'data-size': 'medium',
             'data-show-faces': 'false',
-            'data-auto-logout-link': 'true' })
+            'data-auto-logout-link': 'true' }),
+          React.createElement('div', {
+            className: 'g-signin2',
+            'data-theme': 'dark' })
         ),
         React.createElement(
           'div',
           { id: 'msgBox' },
           React.createElement(
-            'h3',
-            null,
+            'div',
+            { id: 'welcome' },
             'Welcome to the Chat Room'
           ),
           React.createElement(
@@ -13340,6 +13350,16 @@ var Button = exports.Button = function (_React$Component) {
                         'facebook_user_token': response.authResponse.accessToken,
                         'msg': document.getElementById("msg").value
                     });
+                } else {
+                    var auth = gapi.auth2.getAuthInstance();
+                    var user = auth.currentUser.get();
+                    if (user.isSignedIn()) {
+                        _Socket.Socket.emit('new msg', {
+                            'google_user_token': user.getAuthResponse().id_token,
+                            'msg': document.getElementById("msg").value
+
+                        });
+                    }
                 }
             });
             document.getElementById("msg").value = "";
