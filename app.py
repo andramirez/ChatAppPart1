@@ -34,7 +34,7 @@ def on_new_msg(data):
             'msgs': all_msgs
         })
     elif 'google_user_token' in data:
-        print 'I MADE IT IN';
+        print 'I MADE IT INTO GOOGLE';
         response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
         json=response.json()
         all_msgs.append({
