@@ -23,16 +23,17 @@ all_msgs = []
 @socketio.on('new msg')
 def on_new_msg(data):
     if data['facebook_user_token'] == "":
-        try:
-            idinfo = client.verify_id_token(data['google_user_token'], '985898840926-hgsdmkcas5969msavv6oe3tf4e651k5d.apps.googleusercontent.com')
+        print 'd'
+        # try:
+        #     idinfo = client.verify_id_token(data['google_user_token'], '985898840926-hgsdmkcas5969msavv6oe3tf4e651k5d.apps.googleusercontent.com')
         
-            if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-                raise crypt.AppIdentityError("Wrong issuer.")
-        except crypt.AppIdentityError:
-            # Invalid token
-            print 'Invalid Token'
-        userid = idinfo['sub']
-        response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + userid)
+        #     if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        #         raise crypt.AppIdentityError("Wrong issuer.")
+        # except crypt.AppIdentityError:
+        #     # Invalid token
+        #     print 'Invalid Token'
+        # userid = idinfo['sub']
+        # response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + userid)
     else:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
     json=response.json()
