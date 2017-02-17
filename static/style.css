@@ -22,8 +22,11 @@
   margin-top: 40px;
   border:solid;
   height:400px;
-  overflow-y: auto;
+  overflow: auto;
 }
 #text{
   padding-top: 1px;
+}
+#text1{
+  overflow:auto;
 }
