@@ -2,7 +2,7 @@ import os
 import flask
 import flask_socketio
 import requests
-from oauth2client import client, crypt
+# from oauth2client import client, crypt
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
