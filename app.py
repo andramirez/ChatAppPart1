@@ -32,7 +32,7 @@ def on_new_msg(data):
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
-    else:
+    elif 'google_user_token' in data:
         response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
         json=response.json()
         all_msgs.append({
