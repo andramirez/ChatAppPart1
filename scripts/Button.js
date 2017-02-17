@@ -16,8 +16,9 @@ export class Button extends React.Component {
             }
             else {
                 // Button.js, continued
-                let auth=gapi.auth2.getAuthInstance();
-                let user=auth.currentUser.get();
+                let auth = gapi.auth2.getAuthInstance();
+                let user = auth.currentUser.get();
+                console.log(user.getAuthResponse().id_token);
                 if(user.isSignedIn()){
                     Socket.emit('new number',{
                         'google_user_token':user.getAuthResponse().id_token,

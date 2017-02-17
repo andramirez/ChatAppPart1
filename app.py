@@ -22,11 +22,10 @@ all_msgs = []
 @socketio.on('new msg')
 def on_new_msg(data):
     if data['facebook_user_token'] == "":
-        response=requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
+        response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
     else:
-        response=requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
+        response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
     json=response.json()
-    print "Got an event for new msg with data:", data
     all_msgs.append({
         'name':" " + json['name'],
         'picture':json['picture']['data']['url'],
