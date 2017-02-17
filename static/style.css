@@ -25,7 +25,7 @@
   margin-top: 40px;
   height:400px;
   overflow: auto;
-  /*background-color: rgba(190, 190, 190, .75);*/
+  background-color: rgba(190, 190, 190, .75);
 }
 #text{
   padding-top: 1px;
