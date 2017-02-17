@@ -30,7 +30,7 @@ export class Content extends React.Component {
       background: 'rgba(190, 190, 190, .75)'
     };
     let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><h1>{n.name}:</h1>{n.msgs}</div>
+            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><h5>{n.name}:</h5>{n.msgs}</div>
     );
     
     return (
