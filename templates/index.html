@@ -1,9 +1,33 @@
 <html>
     <head>
+        <title>
+            Chatroom Web App
+        </title>
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
     </head>
     <body>
-        <div id="content"></div>
+      <script>
+        window.fbAsyncInit=function(){
+          FB.init({
+            appId      : '186557178496930',
+            cookie     : true,  // enable cookies to allow the server to access 
+            xfbml      : true,  // parse social plugins on this page
+            version    : 'v2.8' // use graph api version 2.8
+          });
+          FB.AppEvents.logPageView();
+        };
+        (
+        function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if(d.getElementById(id)){return;}
+        js = d.createElement(s); js.id=id;
+        js.src="//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js,fjs);
+        }(document,'script','facebook-jssdk'));
+      </script>
+        <div class="container">
+        <div id="content" style=></div>
         <script type="text/javascript" src="/static/script.js"></script>
+        </div>
     </body>
 </html>

@@ -6,18 +6,22 @@ export class Button extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let random = Math.floor(Math.random() * 100);
-        console.log('Generated a random number: ', random);
-        Socket.emit('new number', {
-            'number': random,
+        FB.getLoginStatus((response)=>{
+            if(response.status=='connected'){
+                Socket.emit('new msg',{
+                    'facebook_user_token':
+                    response.authResponse.accessToken,
+                    'msg': document.getElementById("msg").value,
+                });
+            }    
         });
-        console.log('Sent up the random number to server!');
+        document.getElementById("msg").value = "";
     }
-
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <button>Send up a random number!</button>
+            <textarea id="msg" rows="4" cols="50" placeholder="Please insert text"></textarea> 
+            <button id="b1">Send</button>
             </form>
         );
     }

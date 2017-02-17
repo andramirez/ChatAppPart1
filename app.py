@@ -1,6 +1,7 @@
 import os
 import flask
 import flask_socketio
+import requests
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
@@ -17,10 +18,20 @@ def on_connect():
 def on_disconnect():
     print 'Someone disconnected!'
 
-@socketio.on('new number')
-def on_new_number(data):
-    print "Got an event for new number with data:", data
-    # TODO: Fill me out!
+all_msgs = []
+@socketio.on('new msg')
+def on_new_msg(data):
+    response=requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
+    json=response.json()
+    print "Got an event for new msg with data:", data
+    all_msgs.append({
+        'name':json['name'],
+        'picture':json['picture']['data']['url'],
+        'msgs':data['msg']
+        })
+    socketio.emit('all msgs', {
+        'msgs': all_msgs
+    })
 
 socketio.run(
     app,
