@@ -43,7 +43,7 @@ def on_new_msg(data):
         json=response.json()
         all_msgs.append({
             'name':" " + json['name'],
-            'picture':json['picture']['data']['url'],
+            'picture':json['picture'],
             'msgs':data['msg']
             })
         socketio.emit('all msgs', {
