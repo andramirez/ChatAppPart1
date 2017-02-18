@@ -51,7 +51,7 @@ export class Content extends React.Component {
           <div 
             className="g-signin2" 
             data-theme="dark">
-            </div>
+          </div>
         </div>
         <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>

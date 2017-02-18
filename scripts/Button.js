@@ -17,7 +17,6 @@ export class Button extends React.Component {
         
         FB.getLoginStatus((response)=>{
             if(response.status=='connected'){
-                console.log("YO. WE IN WITH FACEBOOK");
                 Socket.emit('new msg',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
@@ -27,9 +26,7 @@ export class Button extends React.Component {
             else {
                 let auth = gapi.auth2.getAuthInstance();
                 let user = auth.currentUser.get();
-                console.log("YO. WE IN WITH GOOGLE");
                 if(user.isSignedIn()){
-                    console.log("YO. WE IN WITH GOOGLE2");
                     Socket.emit('new msg',{
                         'google_user_token': user.getAuthResponse().id_token,
                         'msg': document.getElementById("msg").value,
