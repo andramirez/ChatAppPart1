@@ -39,7 +39,7 @@ def on_new_msg(data):
             'msgs':data['msg']
             })
             
-        models.db.session.add(models.Message(json['name']) +  models.Message(data['msg']))
+        models.db.session.add(models.Message(json['name'] + data['msg'] + json['picture']['data']['url']))
         models.db.session.commit()
         
         socketio.emit('all msgs', {
