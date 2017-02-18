@@ -13106,6 +13106,8 @@ var _Socket = __webpack_require__(64);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -13152,6 +13154,9 @@ var Content = exports.Content = function (_React$Component) {
       var chat = {
         background: 'rgba(190, 190, 190, .75)'
       };
+      var chatbox = {
+        visibility: 'hidden'
+      };
       var msgs = this.state.msgs.map(function (n, index) {
         return React.createElement(
           'div',
@@ -13172,7 +13177,7 @@ var Content = exports.Content = function (_React$Component) {
         { className: 'App' },
         React.createElement(
           'div',
-          { id: 'live', className: 'small-container' },
+          _defineProperty({ id: 'live' }, 'id', 'small-container'),
           React.createElement(
             'h3',
             null,
@@ -13183,7 +13188,8 @@ var Content = exports.Content = function (_React$Component) {
             'data-max-rows': '1',
             'data-size': 'medium',
             'data-show-faces': 'false',
-            'data-auto-logout-link': 'true' }),
+            'data-auto-logout-link': 'true'
+          }),
           React.createElement('div', {
             className: 'g-signin2',
             'data-theme': 'dark' })
@@ -13344,6 +13350,15 @@ var Button = exports.Button = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
 
+            // var message = document.getElementById("msg").value;
+            // if(message.startsWith("!!"))
+            // {
+
+            // }
+            // else{
+
+            // }
+
             FB.getLoginStatus(function (response) {
                 if (response.status == 'connected') {
                     _Socket.Socket.emit('new msg', {
@@ -13353,6 +13368,7 @@ var Button = exports.Button = function (_React$Component) {
                 } else {
                     var auth = gapi.auth2.getAuthInstance();
                     var user = auth.currentUser.get();
+                    console.log("YO. WE IN WITH GOOGLE");
                     if (user.isSignedIn()) {
                         _Socket.Socket.emit('new msg', {
                             'google_user_token': user.getAuthResponse().id_token,
