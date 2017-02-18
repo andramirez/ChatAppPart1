@@ -2,7 +2,7 @@ import os
 import flask
 import flask_socketio
 import requests
-import models
+# import models
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
@@ -34,9 +34,9 @@ def on_new_msg(data):
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
-        messages = models.Message.query.all()
-        html = ['<li>' + m.text + '<li>' for m in messages]
-        return '<ul>' + ''.join(html) + '</ul>'
+        # messages = models.Message.query.all()
+        # html = ['<li>' + m.text + '<li>' for m in messages]
+        # return '<ul>' + ''.join(html) + '</ul>'
     else:
         print 'I MADE IT INTO GOOGLE';
         response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
