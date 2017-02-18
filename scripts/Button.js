@@ -28,6 +28,7 @@ export class Button extends React.Component {
                 let user = auth.currentUser.get();
                 console.log("YO. WE IN WITH GOOGLE");
                 if(user.isSignedIn()){
+                    console.log("YO. WE IN WITH GOOGLE2");
                     Socket.emit('new msg',{
                         'google_user_token': user.getAuthResponse().id_token,
                         'msg': document.getElementById("msg").value,
