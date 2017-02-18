@@ -35,12 +35,12 @@ export class Content extends React.Component {
     let msgs = this.state.msgs.map(
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
-    function hideShow(){
-      if($('#small-container').is(":visible")){
-        document.getElementById('#small-container').visibility='none';
-        document.getElementById('#msgBox').visibility='block';
-      }
-    }
+    // function hideShow(){
+    //   if($('#small-container').is(":visible")){
+    //     document.getElementById('#small-container').visibility='none';
+    //     document.getElementById('#msgBox').visibility='block';
+    //   }
+    // }
     
     return (
       <div className="App">
@@ -52,7 +52,7 @@ export class Content extends React.Component {
           data-size="medium" 
           data-show-faces="false" 
           data-auto-logout-link="true"
-          onClick ='hideShow()'>
+          >
           </div>            
           <div 
             className="g-signin2" 
