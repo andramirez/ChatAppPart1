@@ -17,6 +17,7 @@ export class Button extends React.Component {
         
         FB.getLoginStatus((response)=>{
             if(response.status=='connected'){
+                console.log("YO. WE IN WITH FACEBOOK");
                 Socket.emit('new msg',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
