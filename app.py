@@ -38,9 +38,10 @@ def on_new_msg(data):
             'picture':json['picture']['data']['url'],
             'msgs':data['msg']
             })
-            messages = models.Message.query.all()
-            html = ['<li>' + all_msgs + '<li>']
-            return '<ul>' + ''.join(html) + '</ul>'
+            
+        models.db.session.add(models.Message(all_msgs))
+        models.db.session.commit()
+        
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
