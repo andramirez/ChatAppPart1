@@ -29,27 +29,37 @@ export class Content extends React.Component {
     const chat = {
       background: 'rgba(190, 190, 190, .75)'
     };
+    const chatbox ={
+      visibility:'hidden'
+    }
     let msgs = this.state.msgs.map(
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
+    function hideShow(){
+      if($('#small-container').is(":visible")){
+        document.getElementById('#small-container').visibility='none';
+        document.getElementById('#msgBox').visibility='block';
+      }
+    }
     
     return (
       <div className="App">
-          <div id="live" className = "small-container">
+          <div id="live" id = "small-container">
             <h3>Please Sign In Using Google or Facebook</h3>
           <div 
           className="fb-login-button" 
           data-max-rows="1" 
           data-size="medium" 
           data-show-faces="false" 
-          data-auto-logout-link="true">
+          data-auto-logout-link="true"
+          onClick ='hideShow()'>
           </div>            
           <div 
             className="g-signin2" 
             data-theme="dark">
             </div>
         </div>
-        <div id="msgBox">
+        <div id="msgBox" style={chatbox}>
           <div id="welcome">Welcome to the Chat Room</div>
           <div id="chatbox" style={chat}>
             <div id="text">{ msgs }</div>
