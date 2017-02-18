@@ -10,10 +10,10 @@ socketio = flask_socketio.SocketIO(app)
 import models
 
 @app.route('/')
-def index():
-    messages = models.Message.query.all()
-    html = ['<li>' + m.text + '<li>' for m in messages]
-    return '<ul>' + ''.join(html) + '</ul>'
+# def index():
+#     messages = models.Message.query.all()
+#     html = ['<li>' + m.text + '<li>' for m in messages]
+#     return '<ul>' + ''.join(html) + '</ul>'
     
 def hello():
     return flask.render_template('index.html')
@@ -38,6 +38,9 @@ def on_new_msg(data):
             'picture':json['picture']['data']['url'],
             'msgs':data['msg']
             })
+            messages = models.Message.query.all()
+            html = ['<li>' + all_msgs + '<li>']
+            return '<ul>' + ''.join(html) + '</ul>'
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
