@@ -1,6 +1,19 @@
 import flask_sqlalchemy, app, os
+import psycopg2
+import urlparse
 
-app.app.config['SQLALCHEMY_DATABASE_URI']= os.getenv('db_url')
+urlparse.uses_netloc.append("postgres")
+url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+conn = psycopg2.connect(
+    database=url.path[1:],
+    user=url.username,
+    password=url.password,
+    host=url.hostname,
+    port=url.port
+)
+
+app.app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 db = flask_sqlalchemy.SQLAlchemy(app.app)
 
 class Message(db.Model):
