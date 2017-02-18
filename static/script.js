@@ -13149,8 +13149,8 @@ var Content = exports.Content = function (_React$Component) {
         overflow: 'hidden',
         textoverflow: 'ellipsis'
       };
-      var AppStyle = {
-        backgroundImage: '../images/bg.jpg'
+      var chat = {
+        background: 'rgba(190, 190, 190, .75)'
       };
       var msgs = this.state.msgs.map(function (n, index) {
         return React.createElement(
@@ -13158,7 +13158,7 @@ var Content = exports.Content = function (_React$Component) {
           { key: index, style: style, id: 'text1' },
           React.createElement('img', { src: n.picture }),
           React.createElement(
-            'h1',
+            'b',
             null,
             n.name,
             ':'
@@ -13169,7 +13169,7 @@ var Content = exports.Content = function (_React$Component) {
 
       return React.createElement(
         'div',
-        { className: 'App', style: AppStyle },
+        { className: 'App' },
         React.createElement(
           'div',
           { id: 'live', className: 'small-container' },
@@ -13198,7 +13198,7 @@ var Content = exports.Content = function (_React$Component) {
           ),
           React.createElement(
             'div',
-            { id: 'chatbox' },
+            { id: 'chatbox', style: chat },
             React.createElement(
               'div',
               { id: 'text' },
