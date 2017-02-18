@@ -17,4 +17,4 @@ class Message(db.Model):
         self.msg = content['msgs']
     
     def __repr__(self): 
-        return '<Message text: %s>' % self.msg
+        return '<Message text: %s %s %s>' % self.pic %self.name %self.msg
