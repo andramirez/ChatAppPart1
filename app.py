@@ -41,10 +41,7 @@ def on_disconnect():
     print 'Someone disconnected!'
     
 def bot_msg(argument):
-    print "In bot_msg"
-    print argument
     if "hello" in argument:
-        print "HELLO"
         return "Hello, there!"
 
 ## appending all aspects of message
@@ -68,7 +65,13 @@ def on_new_msg(data):
         })
         
         if "!!" in data['msg']:
-            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot_msg(data['msg'])+"'"))
+            bot = bot_msg(data['msg'])
+            all_msgs.append({
+            'name':" bot.bot",
+            'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+            'msgs':bot
+            })
+            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot+"'"))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
