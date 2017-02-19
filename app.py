@@ -9,23 +9,39 @@ socketio = flask_socketio.SocketIO(app)
 
 import models
 
+##current database print out
 @app.route('/')
 # def index():
 #     messages = models.Message.query.all()
 #     html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
 #     return '<ul>' + ''.join(html) + '</ul>'
-    
+
+##template     
 def hello():
     return flask.render_template('index.html')
 
+##socket connection/ datbase
+database =[]
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
+    messages = models.Message.query.all()
+    database.append({
+        'name': [m.name for m in messages],
+        'pic':[m.pic for m in messages],
+        'msg':[m.msg for m in messages]
+    })
 
+#socket disconnect
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
+    
+def bot_msg(argument):
+    if "hello" in argument:
+        return "Hello, there!"
 
+## appending all aspects of message
 all_msgs = []
 @socketio.on('new msg')
 def on_new_msg(data):
@@ -46,15 +62,7 @@ def on_new_msg(data):
             'msgs': all_msgs
         })
         if "!!" in data['msg']:
-            if "hello" in data['msg']:
-                chat = "Hello, there!"
-            all_msgs.append({
-                'name':' bot.bot',
-                'picture':'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67',
-                'msgs':chat
-            })
-            
-            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', u'Hello, there!'))
+            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot_msg(data['msg'])+"'"))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
