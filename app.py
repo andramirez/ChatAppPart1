@@ -57,7 +57,7 @@ def on_new_msg(data):
                 'msgs':chat
             })
             
-            models.db.session.add(models.Message(all_msgs['picture'], all_msgs['name'], all_msgs['msgs']))
+            models.db.session.add(models.Message(u'http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-1-930x760.jpg', u' bot.bot', u'Hello, there!'))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
