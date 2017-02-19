@@ -7,14 +7,14 @@ db = flask_sqlalchemy.SQLAlchemy(app.app)
 
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True) # key
-    pic = db.Column(db.String(300))
+    picture = db.Column(db.String(300))
     name = db.Column(db.String(500))
-    msg = db.Column(db.String(500))
+    message = db.Column(db.String(500))
     
     def __init__(self, p,n,m):
-        self.pic = p
+        self.picture = p
         self.name = n
-        self.msg = m
+        self.message = m
     
     def __repr__(self): 
-        return '<Message text: %s %s %s>' % self.pic %self.name %self.msg
+        return '<Message text: %s %s %s>' % self.picture %self.name %self.message
