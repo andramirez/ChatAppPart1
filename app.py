@@ -44,6 +44,7 @@ def bot_msg(argument):
     print "In bot_msg"
     print argument
     if "hello" in argument:
+        print "hello"
         return "Hello, there!"
 
 ## appending all aspects of message
