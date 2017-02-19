@@ -11,10 +11,10 @@ import models
 
 ##current database print out
 @app.route('/')
-def index():
-    messages = models.Message.query.all()
-    html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
-    return '<ul>' + ''.join(html) + '</ul>'
+# def index():
+#     messages = models.Message.query.all()
+#     html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
+#     return '<ul>' + ''.join(html) + '</ul>'
 
 ##template     
 def hello():
