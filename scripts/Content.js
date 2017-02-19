@@ -32,13 +32,9 @@ export class Content extends React.Component {
     const chatbox ={
       visibility:'hidden'
     }
-    const image={
-      width: 16, 
-      height: 16
-      
-    }
+
     let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img style={image} src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
+            (n, index) => <div key = {index} style={style} id="text1"><img style={width: '16px', height: '16px'} src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
     
     return (
