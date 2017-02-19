@@ -17,9 +17,10 @@ def index():
     # messages = models.Message.query.all()
     # html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
     # return '<ul>' + ''.join(html) + '</ul>'
-    recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
-    for row in recent.from_self().order_by(models.Message.id):
-        chat_log.append({'picture':row.picture, 'name':row.name,'message':row.message})
+    
+    # recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
+    # for row in recent.from_self().order_by(models.Message.id):
+    #     chat_log.append({'picture':row.picture, 'name':row.name,'message':row.message})
 
 ##template     
 def hello():
@@ -44,11 +45,11 @@ def on_new_message(data):
     if 'facebook_user_token' in data:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()
-        # all_messages.append({ ##retrieving facebook data
-        #     'name':" " + json['name'],
-        #     'picture':json['picture']['data']['url'],
-        #     'messages':data['message']
-        #     })
+        all_messages.append({ ##retrieving facebook data
+            'name':" " + json['name'],
+            'picture':json['picture']['data']['url'],
+            'messages':data['message']
+            })
         ##add data to the database    
         models.db.session.add(models.Message(json['picture']['data']['url'], json['name'], data['message']))
         models.db.session.commit()
