@@ -45,6 +45,7 @@ def on_new_msg(data):
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
+        print "Almost done"
         if "!!" in data['msg']:
             if "hello" in data['msg']:
                 chat = "Hello, there!"
@@ -60,6 +61,7 @@ def on_new_msg(data):
             socketio.emit('all msgs', {
                 'msgs': all_msgs
         }) 
+        print "Done"
     else:
         print 'I MADE IT INTO GOOGLE';
         response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
