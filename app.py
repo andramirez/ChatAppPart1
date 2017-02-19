@@ -46,22 +46,24 @@ def on_new_msg(data):
             'msgs': all_msgs
         })
         print "Almost done"
-        # if "!!" in data['msg']:
-        #     if "hello" in data['msg']:
-        #         chat = "Hello, there!"
-        #     all_msgs.append({
-        #         'name':" bot.bot",
-        #         'picture':'http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-1-930x760.jpg',
-        #         'msgs':chat
-        #     })
+        if "!!" in data['msg']:
+            print "YES, THERE ARE !!"
+            if "hello" in data['msg']:
+                print "YES, THERE is HELLO"
+                chat = "Hello, there!"
+            all_msgs.append({
+                'name':' bot.bot',
+                'picture':'http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-1-930x760.jpg',
+                'msgs':chat
+            })
             
-        #     models.db.session.add(models.Message(all_msgs['picture'], all_msgs['name'], all_msgs['msgs']))
-        #     models.db.session.commit()
+            models.db.session.add(models.Message(all_msgs['picture'], all_msgs['name'], all_msgs['msgs']))
+            models.db.session.commit()
             
-        #     socketio.emit('all msgs', {
-        #         'msgs': all_msgs
-        # }) 
-        # print "Done"
+            socketio.emit('all msgs', {
+                'msgs': all_msgs
+        }) 
+        print "Done"
     else:
         print 'I MADE IT INTO GOOGLE';
         response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
