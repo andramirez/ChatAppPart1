@@ -18,7 +18,7 @@ import models
 
 ##template     
 def hello():
-    return flask.render_template('index.html')
+    return flask.render_template('index.html', data = database)
 
 ##socket connection/ datbase
 database =[]
@@ -26,14 +26,16 @@ database =[]
 def on_connect():
     print 'Someone connected!'
     messages = models.Message.query.all()
-    database.append({
-        'name': [m.name for m in messages],
-        'picture':[m.pic for m in messages],
-        'msg':[m.msg for m in messages]
-    })
-    socketio.emit('database', {
-            'data': all_msgs
-        })
+    html = ['<div>' + m.pic + m.name + m.msg + '<div>' for m in messages]
+    database = ''.join(html)
+    # database.append({
+    #     'name': [m.name for m in messages],
+    #     'picture':[m.pic for m in messages],
+    #     'msg':[m.msg for m in messages]
+    # })
+    # socketio.emit('database', {
+    #         'data': all_msgs
+    #     })
 
 #socket disconnect
 @socketio.on('disconnect')
@@ -43,6 +45,10 @@ def on_disconnect():
 def bot_msg(argument):
     if "hello" in argument:
         return "Hello, there!"
+    if "about" in argument:
+        return "Welcome to the Chat Room! Feel free to send messages to each other or to me!"
+    if "help" in argument:
+        return "Current Commands:\n !!hello: replies with a greeting\n !!about: gives description of chatroom\n !!help: returns known commands\n !!say <something>: has bot repeat message"
 
 ## appending all aspects of message
 all_msgs = []
