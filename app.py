@@ -11,7 +11,7 @@ import models
 
 ##current database print out
 @app.route('/')
-# def index():
+def index():
     messages = models.Message.query.all()
     html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
     return '<ul>' + ''.join(html) + '</ul>'
