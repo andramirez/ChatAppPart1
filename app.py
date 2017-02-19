@@ -88,11 +88,11 @@ def on_new_message(data):
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
-    con = []
-    con.append({
-        'message': "!!connect"
-    })
-    on_new_message(con)
+    # con = []
+    # con.append({
+    #     'message': "!!connect"
+    # })
+    # on_new_message(con)
 
 #socket disconnect
 @socketio.on('disconnect')
