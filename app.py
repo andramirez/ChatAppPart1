@@ -39,13 +39,16 @@ def on_new_msg(data):
             'msgs':data['msg']
             })
             
-        models.db.session.add(models.Message(json['name'], json['name'], data['msg']))
+        models.db.session.add(models.Message(json['picture'], json['name'], data['msg']))
         models.db.session.commit()
         
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
         print "Almost done"
+        print json['picture']
+        print json['name']
+        print data['msg']
         # if "!!" in data['msg']:
         #     if "hello" in data['msg']:
         #         chat = "Hello, there!"
