@@ -13,7 +13,7 @@ chat_log=[]
 ##current database print out
 @app.route('/')
 
-def index():
+# def index():
     # messages = models.Message.query.all()
     # html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
     # return '<ul>' + ''.join(html) + '</ul>'
@@ -38,14 +38,13 @@ def bot_msg(argument):
         return "Current Commands:</br> !!hello: replies with a greeting</br>!!about: gives description of chatroom</br> !!help: returns known commands</br !!say <something>: has bot repeat message"
 
 ## appending all aspects of message
-all_messages = []
 @socketio.on('new message')
 def on_new_message(data):
     ##Facebook login
     if 'facebook_user_token' in data:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()
-        all_messages.append({ ##retrieving facebook data
+        chat_log.append({ ##retrieving facebook data
             'name':" " + json['name'],
             'picture':json['picture']['data']['url'],
             'messages':data['message']
@@ -71,7 +70,7 @@ def on_new_message(data):
             })
     if data['message'].startsWith("!!"):
         bot = bot_message(data['message'])
-        all_messages.append({
+        chat_log.append({
         'name':" bot.bot",
         'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
         'messages':bot
