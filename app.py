@@ -42,6 +42,7 @@ def on_disconnect():
     
 def bot_msg(argument):
     print "In bot_msg"
+    print argument
     if "hello" in argument:
         return "Hello, there!"
 
