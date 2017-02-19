@@ -24,22 +24,7 @@ def index():
 ##template     
 def hello():
     return flask.render_template('index.html')
-
-##socket connection/ datbase
-@socketio.on('connect')
-def on_connect():
-    print 'Someone connected!'
-    con = []
-    con.append({
-        'message': "!!connect"
-    })
-    on_new_message(con)
-
-#socket disconnect
-@socketio.on('disconnect')
-def on_disconnect():
-    print 'Someone disconnected!'
-
+    
 #bot messages    
 def bot_msg(argument):
     if "hello" in argument:
@@ -54,7 +39,7 @@ def bot_msg(argument):
 ## appending all aspects of message
 all_messages = []
 @socketio.on('new message')
-def on_new_msg(data):
+def on_new_message(data):
     ##Facebook login
     if 'facebook_user_token' in data:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
@@ -96,6 +81,21 @@ def on_new_msg(data):
         socketio.emit('all messages', {
             'messages': chat_log
     }) 
+
+##socket connection/ datbase
+@socketio.on('connect')
+def on_connect():
+    print 'Someone connected!'
+    con = []
+    con.append({
+        'message': "!!connect"
+    })
+    on_new_message(con)
+
+#socket disconnect
+@socketio.on('disconnect')
+def on_disconnect():
+    print 'Someone disconnected!'
         
 if __name__ == '__main__': 
     socketio.run(
