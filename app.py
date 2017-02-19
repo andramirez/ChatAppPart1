@@ -45,11 +45,8 @@ def on_new_msg(data):
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
-        print "Almost done"
         if "!!" in data['msg']:
-            print "YES, THERE ARE !!"
             if "hello" in data['msg']:
-                print "YES, THERE is HELLO"
                 chat = "Hello, there!"
             all_msgs.append({
                 'name':' bot.bot',
