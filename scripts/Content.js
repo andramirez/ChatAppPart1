@@ -6,13 +6,13 @@ export class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'msgs': [],
+            'messages': [],
         };
     }
     componentDidMount() {
-      Socket.on('all msgs', (data) => {
+      Socket.on('all messages', (data) => {
           this.setState({
-              'msgs': data['msgs']
+              'messages': data['messages']
           });
       })
   }
@@ -33,8 +33,8 @@ export class Content extends React.Component {
       visibility:'hidden'
     }
 
-    let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
+    let messages = this.state.messages.map(
+            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.messages}</div>
     );
     
     return (
