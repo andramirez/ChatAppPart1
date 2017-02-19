@@ -9,42 +9,46 @@ socketio = flask_socketio.SocketIO(app)
 
 import models
 
-chat_log=[]
 ##current database print out
 @app.route('/')
-
 # def index():
     # messages = models.Message.query.all()
-    # html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
+    # html = ['<li>' + m.pic + m.name + m.message + '<li>' for m in messages]
     # return '<ul>' + ''.join(html) + '</ul>'
-    
-    # recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
-    # for row in recent.from_self().order_by(models.Message.id):
-    #     chat_log.append({'picture':row.picture, 'name':row.name,'message':row.message})
 
 ##template     
 def hello():
     return flask.render_template('index.html')
-    
+
+##socket connection/ datbase
+database =[]
+@socketio.on('connect')
+def on_connect():
+    print 'Someone connected!'
+
+#socket disconnect
+@socketio.on('disconnect')
+def on_disconnect():
+    print 'Someone disconnected!'
+
 #bot messages    
 def bot_message(argument):
     if "hello" in argument:
         return "Hello, there!"
-    if "connect" in argument:
-        return "Welcome to the chat room"
     if "about" in argument:
         return "Welcome to the Chat Room! Feel free to send messages to each other or to me!"
     if "help" in argument:
         return "Current Commands:</br> !!hello: replies with a greeting</br>!!about: gives description of chatroom</br> !!help: returns known commands</br !!say <something>: has bot repeat message"
 
 ## appending all aspects of message
+all_messages = []
 @socketio.on('new message')
 def on_new_message(data):
     ##Facebook login
     if 'facebook_user_token' in data:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()
-        chat_log.append({ ##retrieving facebook data
+        all_messages.append({ ##retrieving facebook data
             'name':" " + json['name'],
             'picture':json['picture']['data']['url'],
             'messages':data['message']
@@ -54,50 +58,34 @@ def on_new_message(data):
         models.db.session.commit()
         
         socketio.emit('all messages', {
-            'messages': chat_log
+            'messages': all_messages
         })
         
-        # # if data['message'].startsWith('!!'):
-        # if "!!" in data['message']:
-        #     bot = bot_message(data['message'])
-        #     chat_log.append({
-        #     'name':" bot.bot",
-        #     'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
-        #     'messages':bot
-        #     })
-        #     models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot+"'"))
-        #     models.db.session.commit()
-            
-        #     socketio.emit('all messages', {
-        #         'messages': chat_log
-        # }) 
-    else:
-        if 'google_user_token' in data:
-            response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
-            json=response.json()
-            # all_messages.append({
-            #     'name':" " + json['name'],
-            #     'picture':json['picture'],
-            #     'messages':data['message']
-            #     })
-            socketio.emit('all messages', {
-                'messages': chat_log
+        if "!!" in data['message']:
+            bot = bot_message(data['message'])
+            all_messages.append({
+            'name':" bot.bot",
+            'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+            'messages':bot
             })
-
-##socket connection/ datbase
-@socketio.on('connect')
-def on_connect():
-    print 'Someone connected!'
-    # con = []
-    # con.append({
-    #     'message': "!!connect"
-    # })
-    # on_new_message(con)
-
-#socket disconnect
-@socketio.on('disconnect')
-def on_disconnect():
-    print 'Someone disconnected!'
+            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot+"'"))
+            models.db.session.commit()
+            
+            socketio.emit('all messages', {
+                'messages': all_messages
+        }) 
+        
+    else:
+        response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
+        json=response.json()
+        all_messages.append({
+            'name':" " + json['name'],
+            'picture':json['picture'],
+            'messages':data['message']
+            })
+        socketio.emit('all messages', {
+            'messages': all_messages
+        })
         
 if __name__ == '__main__': 
     socketio.run(
