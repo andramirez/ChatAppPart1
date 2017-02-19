@@ -50,7 +50,7 @@ def on_new_msg(data):
                 chat = "Hello, there!"
             all_msgs.append({
                 'name':' bot.bot',
-                'picture':'http://1u88jj3r4db2x4txp44yqfj1.wpengine.netdna-cdn.com/wp-content/uploads/2016/04/chatbot-1-930x760.jpg',
+                'picture':'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67',
                 'msgs':chat
             })
             
