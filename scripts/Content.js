@@ -15,11 +15,6 @@ export class Content extends React.Component {
               'msgs': data['msgs']
           });
       })
-      // Socket.on('database', (data) => {
-      //     this.setState({
-      //         'data': data['data']
-      //     });
-      // })
   }
   render() {
     const style = {
@@ -37,9 +32,7 @@ export class Content extends React.Component {
     const chatbox ={
       visibility:'hidden'
     }
-    // let data = this.state.data.map(
-    //         (m, index1) => <div key = {index1} style={style} id="text1"><img src={m.picture}/><b>{m.name}:</b>{m.msg}</div>
-    // );
+
     let msgs = this.state.msgs.map(
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
@@ -64,7 +57,7 @@ export class Content extends React.Component {
         <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>
           <div id="chatbox" style={chat}>
-            <div id="text">{ data }</div>
+            <div id="text">{ msgs }</div>
           </div>
           <Button/>
         </div>

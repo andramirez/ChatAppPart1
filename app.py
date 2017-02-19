@@ -11,37 +11,22 @@ import models
 
 ##current database print out
 @app.route('/')
-# def index():
-#     messages = models.Message.query.all()
-#     html = ['<li>' + m.pic + m.name + m.msg + '<li>' for m in messages]
-#     return '<ul>' + ''.join(html) + '</ul>'
 
 ##template     
 def hello():
-    return flask.render_template('index.html', data = database)
+    return flask.render_template('index.html')
 
-##socket connection/ datbase
-database =[]
+##socket connection
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
-    # messages = models.Message.query.all()
-    # html = ['<div>' + m.pic + m.name + m.msg + '<div>' for m in messages]
-    # database = ''.join(html)
-    # # database.append({
-    # #     'name': [m.name for m in messages],
-    # #     'picture':[m.pic for m in messages],
-    # #     'msg':[m.msg for m in messages]
-    # # })
-    # # socketio.emit('database', {
-    # #         'data': all_msgs
-    # #     })
 
 #socket disconnect
 @socketio.on('disconnect')
 def on_disconnect():
     print 'Someone disconnected!'
-    
+
+##bot message sort    
 def bot_msg(argument):
     if "hello" in argument:
         return "Hello, there!"
@@ -71,6 +56,7 @@ def on_new_msg(data):
             'msgs': all_msgs
         })
         
+        ##emitting bot message
         if "!!" in data['msg']:
             bot = bot_msg(data['msg'])
             all_msgs.append({
@@ -87,7 +73,7 @@ def on_new_msg(data):
         print "Done"
         
     else:
-        print 'I MADE IT INTO GOOGLE';
+        ##Google user
         response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
         json=response.json()
         all_msgs.append({
@@ -95,6 +81,7 @@ def on_new_msg(data):
             'picture':json['picture'],
             'msgs':data['msg']
             })
+        #emit google message
         socketio.emit('all msgs', {
             'msgs': all_msgs
         })
