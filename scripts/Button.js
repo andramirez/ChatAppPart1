@@ -6,15 +6,6 @@ export class Button extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         
-        // var message = document.getElementById("msg").value;
-        // if(message.startsWith("!!"))
-        // {
-            
-        // }
-        // else{
-            
-        // }
-        
         FB.getLoginStatus((response)=>{
             if(response.status=='connected'){
                 Socket.emit('new msg',{
