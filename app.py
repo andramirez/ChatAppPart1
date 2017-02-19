@@ -57,7 +57,8 @@ def on_new_message(data):
             'messages': chat_log
         })
         
-        if data['message'].startsWith("!!"):
+        # if data['message'].startsWith('!!'):
+        if "!!" in data['message']:
             bot = bot_message(data['message'])
             chat_log.append({
             'name':" bot.bot",
