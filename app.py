@@ -19,7 +19,7 @@ def index():
     # return '<ul>' + ''.join(html) + '</ul>'
     recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
     for row in recent.from_self().order_by(models.Message.id):
-        chat_log.append({'message':row.message,'name':row.name,'picture':row.picture})
+        chat_log.append({'picture':row.picture, 'name':row.name,'message':row.message})
 
 ##template     
 def hello():
