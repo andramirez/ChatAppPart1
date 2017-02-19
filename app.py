@@ -48,15 +48,16 @@ def bot_msg(argument):
 all_msgs = []
 @socketio.on('new msg')
 def on_new_msg(data):
+    ##Facebook login
     if 'facebook_user_token' in data:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()
-        all_msgs.append({
+        all_msgs.append({ ##retrieving facebook data
             'name':" " + json['name'],
             'picture':json['picture']['data']['url'],
             'msgs':data['msg']
             })
-            
+        ##add data to the database    
         models.db.session.add(models.Message(json['picture']['data']['url'], json['name'], data['msg']))
         models.db.session.commit()
         
