@@ -12,15 +12,15 @@ import models
 all_messages = []
 
 @app.route('/')
-def index():
-    recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
-    for row in recent.from_self().order_by(models.Message.id):
-  	    all_messages.append({'picture':row.picture,'name':row.name,'message':row.message})
-    return flask.render_template('index.html')
+# def index():
+#     recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
+#     for row in recent.from_self().order_by(models.Message.id):
+#   	    all_messages.append({'picture':row.picture,'name':row.name,'message':row.message})
+#     return flask.render_template('index.html')
     
 # ##template     
-# def hello():
-#     return flask.render_template('index.html')
+def hello():
+    return flask.render_template('index.html')
 
 ##socket connection/ datbase
 database =[]
@@ -50,8 +50,8 @@ def on_new_message(data):
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()
         all_messages.append({ ##retrieving facebook data
-            'name':" " + json['name'],
             'picture':json['picture']['data']['url'],
+            'name':" " + json['name'],
             'messages':data['message']
             })
         ##add data to the database    
@@ -65,8 +65,8 @@ def on_new_message(data):
         if "!!" in data['message']:
             bot = bot_message(data['message'])
             all_messages.append({
-            'name':" bot.bot",
             'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+            'name':" bot.bot",
             'messages':bot
             })
             models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot+"'"))
