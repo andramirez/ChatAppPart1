@@ -59,7 +59,8 @@ export class Content extends React.Component {
           <div id="chatbox" style = {chat}>
             <div id="users">Number of users: <br/>
             <ul>{users}</ul>
-            </div>
+          </div>
+          <div id="welcome">Welcome to the Chat Room</div>
             <div id="log" onload='componentDidMount()'>{msgs}</div> 
           </div>
         <Button/>
