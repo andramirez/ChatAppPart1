@@ -42,7 +42,7 @@ def bot_message(argument):
 
 ## appending all aspects of message
 @socketio.on('new message')
-def on_new_message(data):
+def on_new_msg(data):
     print "IN ON_NEW_MSG"
     ##Facebook login
     if 'facebook_user_token' in data:
