@@ -18,9 +18,9 @@ def index():
   	    all_messages.append({'picture':row.picture,'name':row.name,'message':row.message})
     return flask.render_template('index.html')
     
-##template     
-def hello():
-    return flask.render_template('index.html')
+# ##template     
+# def hello():
+#     return flask.render_template('index.html')
 
 ##socket connection/ datbase
 database =[]
