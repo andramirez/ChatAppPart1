@@ -52,14 +52,29 @@ export class Content extends React.Component {
     // let counts = this.state.users.map(
     //         (c, count) => <div key = {count} id="count"><b>{c.count}</b></div>
     // );
-    jQuery(document).ready(function(){       
-      var $t = $('#log');
-      $t.animate({"scrollTop": $('#log')[0].scrollHeight}, "faster");
-    });
+    // jQuery(document).ready(function(){       
+    //   var $t = $('#log');
+    //   $t.animate({"scrollTop": $('#log')[0].scrollHeight}, "faster");
+    // });
     
     return (
       <div className="App">
-
+        <div id="live" id = "small-container">
+          <Login/>   
+        </div>
+        <div id="welcomqe">Welcome to the Chat Room</div>
+        <div id="msgBox">
+          <div id="welcome1">Welcome to the Chat Room</div>
+          
+          <div id="chatbox" style = {chat}>
+            <div id="users">Number of users: <br/>
+            <ul>{users}</ul>
+          </div>
+          <div id="welcome2">Welcome to the Chat Room</div>
+            <div id="log">{msgs}</div> 
+          </div>
+        <Button/>
+        </div>
       </div>
     );
   }
