@@ -54,7 +54,7 @@ export class Content extends React.Component {
     // );
     jQuery(document).ready(function(){       
       var $t = $('#log');
-      $t.animate({"scrollTop": $('#log')[0].scrollHeight}, "slow");
+      $t.animate({"scrollTop": $('#log')[0].scrollHeight}, "faster");
     });
     
     return (
@@ -64,12 +64,13 @@ export class Content extends React.Component {
             <Login/>          
         </div>
         <div id="msgBox">
+          <div id="welcome1">Welcome to the Chat Room</div>
           <div id="welcome">Welcome to the Chat Room</div>
           <div id="chatbox" style = {chat}>
             <div id="users">Number of users: <br/>
             <ul>{users}</ul>
           </div>
-          <div id="welcome">Welcome to the Chat Room</div>
+          <div id="welcome2">Welcome to the Chat Room</div>
             <div id="log">{msgs}</div> 
           </div>
         <Button/>
