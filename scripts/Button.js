@@ -7,9 +7,7 @@ export class Button extends React.Component {
         event.preventDefault();
         console.log("right before auth message")
         FB.getLoginStatus((response)=>{
-            console.log("GOT AUTH")
             if(response.status=='connected'){
-                console.log("GOT AUTH2")
                 Socket.emit('new msg',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
