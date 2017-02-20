@@ -54,9 +54,16 @@ def bot_msg(argument):
         return " Hello, there!"
     elif "riddle" in argument.lower(): #returns a riddle
         riddles = {
-            1: "The more you take, the more you leave behind. What am I?",
-            2: "I don't have eyes, but once I did see. Once I had thoughts, but now I'm white and empty.",
-            3: "What belongs to you but others use it more than you do?"
+            1: "The more you take, the more you leave behind. What am I? Type '!!answer' for the answer",
+            2: "I don't have eyes, but once I did see. Once I had thoughts, but now I'm white and empty. Type '!!answer' for the answer",
+            3: "What belongs to you but others use it more than you do? Type '!!answer' for the answer",
+            4: "What is harder to catch the faster you run? Type '!!answer' for the answer",
+            5: "You will always find me in the past. I can be created in the present, But the future can never taint me. What am I? Type '!!answer' for the answer",
+            6: "An old man wanted to leave all of his money to one of his three sons, but he didn't know which one he should give it to. He gave each of them a few coins and told them to buy something that would be able to fill their living room. The first man bought straw, but there was not enough to fill the room. The second bought some sticks, but they still did not fill the room. The third man bought two things that filled the room, so he obtained his father's fortune. What were the two things that the man bought? Type '!!answer' for the answer",
+            7: "What has a head, a tail, is brown, and has no legs? Type '!!answer' for the answer",
+            8: "What begins with T, ends with T and has T in it? Type '!!answer' for the answer",
+            9: "Wednesday, Tom and Joe went to a restaurant and ate dinner. When they were done they paid for the food and left. But Tom and Joe didn't pay for the food. Who did? Type '!!answer' for the answer",
+            10: "What is big and yellow and comes in the morning, to brighten mom's day? Type '!!answer' for the answer"
         }
         riddle = random.randint(1, len(riddles))
         return riddles[riddle]
@@ -73,7 +80,14 @@ def bot_msg(argument):
             answers ={
                 1: "Footsteps",
                 2: "A Skull",
-                3: "Your name"
+                3: "Your name",
+                4: "Your breath",
+                5: "History",
+                6: "The wise son bought a candle and a box of matches. After lighting the candle, the light filled the entire room.",
+                7: "A penny",
+                8: "A teapot",
+                9: "Wednesday (the name of the third person in the group, not the day)",
+                10: "A School Bus"
             }
             return answers[index]
     elif "connected" in argument.lower(): #returns user connected message

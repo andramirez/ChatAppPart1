@@ -13,7 +13,7 @@ export class Login extends React.Component {
             if (response.status == 'connected') {
                 Socket.emit('new msg', {
                     'facebook_user_token': response.authResponse.accessToken,
-                    'message': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                    'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                 });
                 Socket.emit('new user', {
                     'facebook_user_token': response.authResponse.accessToken,
