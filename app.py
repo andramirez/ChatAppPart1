@@ -62,16 +62,20 @@ def bot_msg(argument):
         return riddles[riddle]
         
     elif "answer" in argument.lower(): #returns answer to riddle
+        global riddle
         print riddle
         if(riddle == 0):
             return "You haven't received a riddle yet! <br/>To ask for a riddle, type: '!!riddle'"
         else:
+            global riddle
+            index = riddle
+            riddle = 0
             answers ={
                 1: "Footsteps",
                 2: "A Skull",
                 3: "Your name"
             }
-            return answers[riddle]
+            return answers[index]
     elif "connected" in argument.lower(): #returns user connected message
         return " A user has connected! Name: "
     elif "about" in argument.lower(): # returns description
