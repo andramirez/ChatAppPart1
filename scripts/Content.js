@@ -33,9 +33,9 @@ export class Content extends React.Component {
       visibility:'hidden'
     }
 
-    let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
-    );
+    // let msgs = this.state.msgs.map(
+    //         (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
+    // );
     
     return (
       <div className="App">
@@ -56,9 +56,7 @@ export class Content extends React.Component {
         </div>
         <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>
-          <div id="chatbox" style={chat}>
-            <div id="text">{ msgs }</div>
-          </div>
+
           <Button/>
         </div>
       </div>
