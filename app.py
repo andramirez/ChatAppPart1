@@ -18,24 +18,19 @@ all_users = []
 @app.route('/')
 
 #prints database to the chatbox
-# def index():
-#     # messages = models.Message.query.all()
-#     # html = ['<li>' + m.picture + m.name + m.message + '<li>' for m in messages]
-#     # return '<ul>' + ''.join(html) + '</ul>'
+def index():
+    # messages = models.Message.query.all()
+    # html = ['<li>' + m.picture + m.name + m.message + '<li>' for m in messages]
+    # return '<ul>' + ''.join(html) + '</ul>'
     
-#     recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
-#     for row in recent.from_self().order_by(models.Message.id):
-#             all_msgs.append({'picture':row.picture,'name':row.name,'message':row.message})
-    
-#     picture = [m['picture'] for m in all_msgs]
-#     name = [m['name'] for m in all_msgs]
-#     message = [m['message'] for m in all_msgs]
-#     # html = ['<div id="text1"><img src=' + m['picture'] + '/><b>'+ m['name'] +':</b>'+ m['message'] +'</div>' for m in all_msgs]
-#     return flask.render_template('index.html', pic = picture, nm=name, ms=message)
-
-##template     
-def hello():
+    recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
+    for row in recent.from_self().order_by(models.Message.id):
+            all_msgs.append({'picture':row.picture,'name':row.name,'msgs':row.message})
     return flask.render_template('index.html')
+
+# ##template     
+# def hello():
+#     return flask.render_template('index.html')
 
 ##socket connection/ datbase
 @socketio.on('connect')
