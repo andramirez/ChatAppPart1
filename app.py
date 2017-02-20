@@ -62,6 +62,7 @@ def bot_msg(argument):
         return riddles[riddle]
         
     elif "answer" in argument.lower(): #returns answer to riddle
+        print riddle
         if(riddle == 0):
             return "You haven't received a riddle yet! <br/>To ask for a riddle, type: '!!riddle'"
         else:
