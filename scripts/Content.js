@@ -60,7 +60,7 @@ export class Content extends React.Component {
     return (
       <div className="App">
           <div id="live" id = "small-container">
-            <Login/>          
+       
         </div>
         <div id="welcomqe">Welcome to the Chat Room</div>
         <div id="msgBox">
