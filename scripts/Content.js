@@ -6,13 +6,13 @@ export class Content extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            'messages': [],
+            'msgs': [],
         };
     }
     componentDidMount() {
-      Socket.on('all messages', (data) => {
+      Socket.on('all msgs', (data) => {
           this.setState({
-              'messages': data['messages']
+              'msgs': data['msgs']
           });
       })
   }
@@ -33,8 +33,8 @@ export class Content extends React.Component {
       visibility:'hidden'
     }
 
-    let messages = this.state.messages.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.messages}</div>
+    let msgs = this.state.msgs.map(
+            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
     
     return (
@@ -54,10 +54,10 @@ export class Content extends React.Component {
             data-theme="dark">
           </div>
         </div>
-        <div id="messageBox">
+        <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>
           <div id="chatbox" style={chat}>
-            <div id="text">{ messages }</div>
+            <div id="text">{ msgs }</div>
           </div>
           <Button/>
         </div>

@@ -13,9 +13,9 @@ class Message(db.Model):
     message = db.Column(db.String(500))
     
     def __init__(self, p,n,m):
-        self.picture = p
+        self.pic = p
         self.name = n
-        self.message = m
+        self.msg = m
     
     def __repr__(self): 
-        return '<Message text: %s %s %s>' % self.picture %self.name %self.message
+        return '<Message text: %s %s %s>' % self.pic %self.name %self.msg

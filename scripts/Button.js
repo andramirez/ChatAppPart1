@@ -10,32 +10,31 @@ export class Button extends React.Component {
             console.log("GOT AUTH")
             if(response.status=='connected'){
                 console.log("GOT AUTH2")
-                Socket.emit('new message',{
+                Socket.emit('new msg',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
-                    'message': document.getElementById("message").value,
+                    'msg': document.getElementById("msg").value,
                 });
             }
             else {
                 let auth = gapi.auth2.getAuthInstance();
                 let user = auth.currentUser.get();
                 if(user.isSignedIn()){
-                    Socket.emit('new message',{
+                    Socket.emit('new msg',{
                         'google_user_token': user.getAuthResponse().id_token,
-                        'message': document.getElementById("message").value,
-                        
+                        'msg': document.getElementById("msg").value,
                     });
                     
                 }
                 
             }
         });
-        document.getElementById("message").value = "";
+        document.getElementById("msg").value = "";
     }
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-            <textarea id="message" rows="4" cols="50" placeholder="Please insert text"></textarea> 
+            <textarea id="msg" rows="4" cols="50" placeholder="Please insert text"></textarea> 
             <button id="b1">Send</button>
             </form>
         );
