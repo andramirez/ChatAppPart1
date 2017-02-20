@@ -154,18 +154,18 @@ def on_new_msg(data):
                 'msgs': all_msgs
         }) 
         #Google auth not implemented.. 
-    # else:
-    #     print 'I MADE IT INTO GOOGLE';
-    #     response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
-    #     json=response.json()
-    #     all_msgs.append({
-    #         'name':" " + json['name'],
-    #         'picture':json['picture'],
-    #         'msgs':data['msg']
-    #         })
-    #     socketio.emit('all msgs', {
-    #         'msgs': all_msgs
-    #     })
+    else:
+        print 'I MADE IT INTO GOOGLE';
+        response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
+        json=response.json()
+        all_msgs.append({
+            'name':" " + json['name'],
+            'picture':json['picture'],
+            'msgs':data['msg']
+            })
+        socketio.emit('all msgs', {
+            'msgs': all_msgs
+        })
         
 if __name__ == '__main__': 
     socketio.run(

@@ -32,6 +32,10 @@ export class Login extends React.Component {
                     data-show-faces="false"
                     data-auto-logout-link="true"
                 </div>
+                <div 
+                className="g-signin2" 
+                data-theme="dark">
+                </div>
                 <form onSubmit={this.handleSubmit}>
                   <input type="submit" value="Start App"></input>
                 </form>

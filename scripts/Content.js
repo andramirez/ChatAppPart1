@@ -53,10 +53,6 @@ export class Content extends React.Component {
           <div id="live" id = "small-container">
             <h3>Please Sign In Using Google or Facebook</h3>
             <Login/>          
-          <div 
-            className="g-signin2" 
-            data-theme="dark">
-          </div>
         </div>
         <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>
