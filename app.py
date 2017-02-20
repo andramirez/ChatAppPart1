@@ -27,7 +27,7 @@ def index():
     name = [m['name'] for m in all_msgs]
     message = [m['message'] for m in all_msgs]
     # html = ['<div id="text1"><img src=' + m['picture'] + '/><b>'+ m['name'] +':</b>'+ m['message'] +'</div>' for m in all_msgs]
-    return flask.render_template('index.html', picture, name, message)
+    return flask.render_template('index.html', pic = picture, nm=name, ms=message)
 
 # ##template     
 # def hello():
