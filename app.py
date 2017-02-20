@@ -1,13 +1,13 @@
 import os
 import flask
 import flask_socketio
-import flask_sqlalchemy
+# import flask_sqlalchemy
 import requests
 
 app = flask.Flask(__name__)
 socketio = flask_socketio.SocketIO(app)
 
-import models
+# import models
 
 all_messages = []
 
@@ -22,8 +22,6 @@ all_messages = []
 def hello():
     return flask.render_template('index.html')
 
-##socket connection/ datbase
-database =[]
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected!'
@@ -55,38 +53,38 @@ def on_new_message(data):
             'messages':data['message']
             })
         ##add data to the database    
-        models.db.session.add(models.Message(json['picture']['data']['url'], json['name'], data['message']))
-        models.db.session.commit()
+        # models.db.session.add(models.Message(json['picture']['data']['url'], json['name'], data['message']))
+        # models.db.session.commit()
         
         socketio.emit('all messages', {
             'messages': all_messages
         })
         
-        if "!!" in data['message']:
-            bot = bot_message(data['message'])
-            all_messages.append({
-            'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
-            'name':" bot.bot",
-            'messages':bot
-            })
-            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot+"'"))
-            models.db.session.commit()
+        # if "!!" in data['message']:
+        #     bot = bot_message(data['message'])
+        #     all_messages.append({
+        #     'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+        #     'name':" bot.bot",
+        #     'messages':bot
+        #     })
+        #     # models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', u' bot.bot', "u'"+bot+"'"))
+        #     # models.db.session.commit()
             
-            socketio.emit('all messages', {
-                'messages': all_messages
-        }) 
+        #     socketio.emit('all messages', {
+        #         'messages': all_messages
+        # }) 
         
-    else:
-        response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
-        json=response.json()
-        all_messages.append({
-            'name':" " + json['name'],
-            'picture':json['picture'],
-            'messages':data['message']
-            })
-        socketio.emit('all messages', {
-            'messages': all_messages
-        })
+    # else:
+    #     response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
+    #     json=response.json()
+    #     all_messages.append({
+    #         'name':" " + json['name'],
+    #         'picture':json['picture'],
+    #         'messages':data['message']
+    #         })
+    #     socketio.emit('all messages', {
+    #         'messages': all_messages
+    #     })
         
 if __name__ == '__main__': 
     socketio.run(
