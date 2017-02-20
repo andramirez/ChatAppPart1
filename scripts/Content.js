@@ -26,9 +26,9 @@ export class Content extends React.Component {
       overflow: 'hidden',
       textoverflow: 'ellipsis'
     };
-    const chat = {
-      background: 'rgba(190, 190, 190, .75)'
-    };
+    // const chat = {
+    //   background: 'rgba(190, 190, 190, .75)'
+    // };
     const chatbox ={
       visibility:'hidden'
     }
