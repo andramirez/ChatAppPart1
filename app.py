@@ -38,8 +38,8 @@ def bot_message(argument):
         return "Hello, there!"
     if "about" in argument:
         return "Welcome to the Chat Room! Feel free to send messages to each other or to me!"
-    if "help" in argument:
-        return "Current Commands:</br> !!hello: replies with a greeting</br>!!about: gives description of chatroom</br> !!help: returns known commands</br !!say <something>: has bot repeat message"
+    # if "help" in argument:
+        # return "Current Commands:</br> !!hello: replies with a greeting</br>!!about: gives description of chatroom</br> !!help: returns known commands</br !!say <something>: has bot repeat message"
 
 ## appending all aspects of message
 @socketio.on('new message')
