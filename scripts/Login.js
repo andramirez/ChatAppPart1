@@ -36,7 +36,7 @@ export class Login extends React.Component {
                 className="g-signin2" 
                 data-theme="dark">
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                <form onload={this.handleSubmit}>
                   <input type="submit" value="Start App"></input>
                 </form>
             </div>
