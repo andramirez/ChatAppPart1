@@ -47,6 +47,9 @@ export class Content extends React.Component {
     // let counts = this.state.users.map(
     //         (c, count) => <div key = {count} id="count"><b>{c.count}</b></div>
     // );
+    $(window).load(function() {
+      $('#log').scrollTop($('#log')[0].scrollHeight);
+    });
     
     return (
       <div className="App">
