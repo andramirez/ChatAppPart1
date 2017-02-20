@@ -60,8 +60,6 @@ export class Content extends React.Component {
     return (
       <div className="App">
           <div id="live" id = "small-container">
-            <h3>Please Sign In Using Google or Facebook</h3>
-            <div id="welcomxae">Welcome to the Chat Raaaoom</div>
             <Login/>          
         </div>
         <div id="welcomqe">Welcome to the Chat Room</div>
