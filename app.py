@@ -9,12 +9,13 @@ socketio = flask_socketio.SocketIO(app)
 
 import models
 
-##current database print out
+chat_log = []
+
 @app.route('/')
-# def index():
-    # messages = models.Message.query.all()
-    # html = ['<li>' + m.pic + m.name + m.message + '<li>' for m in messages]
-    # return '<ul>' + ''.join(html) + '</ul>'
+def index():
+    recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
+    for row in recent.from_self().order_by(models.Message.id):
+  	    chat_log.append({'picture':row.picture,'name':row.name,'message':row.message})
 
 ##template     
 def hello():

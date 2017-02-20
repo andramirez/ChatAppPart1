@@ -11,7 +11,7 @@ export class Button extends React.Component {
                 Socket.emit('new message',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
-                    'message': document.getElementById("msg").value,
+                    'message': document.getElementById("message").value,
                 });
             }
             else {
@@ -20,7 +20,7 @@ export class Button extends React.Component {
                 if(user.isSignedIn()){
                     Socket.emit('new message',{
                         'google_user_token': user.getAuthResponse().id_token,
-                        'message': document.getElementById("msg").value,
+                        'message': document.getElementById("message").value,
                         
                     });
                     
@@ -28,12 +28,12 @@ export class Button extends React.Component {
                 
             }
         });
-        document.getElementById("msg").value = "";
+        document.getElementById("message").value = "";
     }
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-            <textarea id="msg" rows="4" cols="50" placeholder="Please insert text"></textarea> 
+            <textarea id="message" rows="4" cols="50" placeholder="Please insert text"></textarea> 
             <button id="b1">Send</button>
             </form>
         );

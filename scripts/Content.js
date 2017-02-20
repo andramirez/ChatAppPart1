@@ -21,7 +21,7 @@ export class Content extends React.Component {
       border:'.5px solid black', 
       textAlign:'left',
       padding:'2px',
-      width: '695px',
+      width: '495px',
       whitespace: 'nowrap',
       overflow: 'hidden',
       textoverflow: 'ellipsis'
@@ -54,7 +54,7 @@ export class Content extends React.Component {
             data-theme="dark">
           </div>
         </div>
-        <div id="msgBox">
+        <div id="messageBox">
           <div id="welcome">Welcome to the Chat Room</div>
           <div id="chatbox" style={chat}>
             <div id="text">{ messages }</div>
