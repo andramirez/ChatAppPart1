@@ -43,8 +43,10 @@ def bot_message(argument):
 ## appending all aspects of message
 @socketio.on('new message')
 def on_new_message(data):
+    print "IN ON_NEW_MSG"
     ##Facebook login
     if 'facebook_user_token' in data:
+        print "IN FACEBOOK"
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()
         all_messages.append({ ##retrieving facebook data
