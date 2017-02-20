@@ -63,9 +63,10 @@ export class Content extends React.Component {
             <h3>Please Sign In Using Google or Facebook</h3>
             <Login/>          
         </div>
+        <div id="welcomqe">Welcome to the Chat Room</div>
         <div id="msgBox">
           <div id="welcome1">Welcome to the Chat Room</div>
-          <div id="welcome">Welcome to the Chat Room</div>
+          
           <div id="chatbox" style = {chat}>
             <div id="users">Number of users: <br/>
             <ul>{users}</ul>
