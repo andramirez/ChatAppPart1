@@ -15,9 +15,11 @@ export class Login extends React.Component {
                     'facebook_user_token': response.authResponse.accessToken,
                     'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                 });
+                console.log("second socket")
                 Socket.emit('new user', {
                     'facebook_user_token': response.authResponse.accessToken,
                 });
+                console.log("second socket done")
             }
         });
     }
