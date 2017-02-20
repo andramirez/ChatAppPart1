@@ -16,7 +16,8 @@ def index():
     recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
     for row in recent.from_self().order_by(models.Message.id):
   	    all_messages.append({'picture':row.picture,'name':row.name,'message':row.message})
-
+    return flask.render_template('index.html')
+    
 ##template     
 def hello():
     return flask.render_template('index.html')
