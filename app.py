@@ -12,6 +12,7 @@ socketio = flask_socketio.SocketIO(app)
 import models
 
 all_msgs = []
+global riddle
 riddle = 0;
 all_users = []
 ##current database print out
@@ -55,12 +56,10 @@ def bot_msg(argument):
         return riddles[riddle]
         
     elif "answer" in argument.lower(): #returns answer to riddle
-        global riddle
         print riddle
         if(riddle == 0):
             return "You haven't received a riddle yet! <br/>To ask for a riddle, type: '!!riddle'"
         else:
-            global riddle
             index = riddle
             riddle = 0
             answers ={
