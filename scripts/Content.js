@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from './Button';
-import { Button } from './Login';
+import { Login } from './Login';
 import { Socket } from './Socket';
 
 export class Content extends React.Component {
@@ -70,7 +70,6 @@ export class Content extends React.Component {
             <div id="users">Number of users: <br/>
             <ul>{users}</ul>
           </div>
-          <div id="welcome2">Welcome to the Chat Room</div>
             <div id="log">{msgs}</div> 
           </div>
         <Button/>
