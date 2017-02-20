@@ -22,9 +22,12 @@ def index():
     recent = models.db.session.query(models.Message).order_by(models.Message.id.desc()).limit(100)
     for row in recent.from_self().order_by(models.Message.id):
             all_msgs.append({'picture':row.picture,'name':row.name,'message':row.message})
-      
-    html = ['<div id="text1"><img src=' + m['picture'] + '/><b>'+ m['name'] +':</b>'+ m['message'] +'</div>' for m in all_msgs]
-    return flask.render_template('index.html', chat_log = html)
+    
+    picture = [m['picture'] for m in all_msgs]
+    name = [m['name'] for m in all_msgs]
+    message = [m['message'] for m in all_msgs]
+    # html = ['<div id="text1"><img src=' + m['picture'] + '/><b>'+ m['name'] +':</b>'+ m['message'] +'</div>' for m in all_msgs]
+    return flask.render_template('index.html', picture, name, message)
 
 # ##template     
 # def hello():
