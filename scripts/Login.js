@@ -21,6 +21,7 @@ export class Login extends React.Component {
                 });
                 console.log("second socket done")
         });
+    
     }
     render() {
         return (
@@ -36,7 +37,7 @@ export class Login extends React.Component {
                 className="g-signin2" 
                 data-theme="dark">
                 </div>
-                <form onload={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
                   <input type="submit" value="Start App"></input>
                 </form>
             </div>

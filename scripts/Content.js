@@ -9,6 +9,11 @@ export class Content extends React.Component {
         this.state = {
             'msgs': [],
         };
+      Socket.on('all msgs', (data) => {
+          this.setState({
+              'msgs': data['msgs']
+          });
+      })
     }
     //msgs socket
     componentDidMount() {
@@ -65,7 +70,7 @@ export class Content extends React.Component {
             <ul>{users}</ul>
           </div>
           <div id="welcome">Welcome to the Chat Room</div>
-            <div id="log" onload='componentDidMount()'>{msgs}</div> 
+            <div id="log">{msgs}</div> 
           </div>
         <Button/>
         </div>
