@@ -5,7 +5,7 @@ import { Socket } from './Socket';
 export class Button extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
-        
+        console.log("right before auth message")
         FB.getLoginStatus((response)=>{
             console.log("GOT AUTH")
             if(response.status=='connected'){
