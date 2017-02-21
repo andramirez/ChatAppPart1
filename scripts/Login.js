@@ -5,7 +5,7 @@ import { Socket } from './Socket';
 export class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
         this.disableMe();
         this.clicked = false
     }

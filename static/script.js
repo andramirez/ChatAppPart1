@@ -13422,9 +13422,9 @@ var Login = exports.Login = function (_React$Component) {
     function Login(props) {
         _classCallCheck(this, Login);
 
+        // this.handleSubmit = this.handleSubmit.bind(this);
         var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.disableMe();
         _this.clicked = false;
         return _this;
