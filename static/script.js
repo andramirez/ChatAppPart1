@@ -13428,19 +13428,17 @@ var Login = exports.Login = function (_React$Component) {
 
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.disableMe();
-        _this.loadPage();
+        // this.loadPage();
         _this.clicked = false;
         return _this;
     }
+    // loadPage(){
+    //         Socket.emit('new msg', {
+    //                     'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+    //                 });
+    // }
 
     _createClass(Login, [{
-        key: 'loadPage',
-        value: function loadPage() {
-            _Socket.Socket.emit('new msg', {
-                'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-            });
-        }
-    }, {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();

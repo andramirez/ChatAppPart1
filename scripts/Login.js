@@ -7,14 +7,14 @@ export class Login extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.disableMe();
-        this.loadPage();
+        // this.loadPage();
         this.clicked = false
     }
-    loadPage(){
-            Socket.emit('new msg', {
-                        'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                    });
-    }
+    // loadPage(){
+    //         Socket.emit('new msg', {
+    //                     'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+    //                 });
+    // }
     
     handleSubmit(event) {
         event.preventDefault();
