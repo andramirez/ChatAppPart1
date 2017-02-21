@@ -30,8 +30,8 @@ export class Login extends React.Component {
                     data-auto-logout-link="true">
                 </div>
                 <div 
-                className="g-signin2" 
-                data-theme="dark">
+                    className="g-signin2" 
+                    data-theme="dark">
                 </div>
                 <form onload={this.handleSubmit}>
                   <input type="submit" value="Load Messages"></input>
