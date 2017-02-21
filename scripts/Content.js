@@ -30,7 +30,6 @@ export class Content extends React.Component {
       border:'.5px solid black', 
       textAlign:'left',
       padding:'2px',
-      width: '840px',
       whitespace: 'nowrap',
       overflow: 'hidden',
       textoverflow: 'ellipsis'

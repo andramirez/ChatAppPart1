@@ -13148,7 +13148,6 @@ var Content = exports.Content = function (_React$Component) {
         border: '.5px solid black',
         textAlign: 'left',
         padding: '2px',
-        width: '840px',
         whitespace: 'nowrap',
         overflow: 'hidden',
         textoverflow: 'ellipsis'
