@@ -93,6 +93,8 @@ def bot_msg(argument):
         !!riddle: I will ask you a riddle <br> \
         !!answer: I will answer the riddle. Only after you've asked, though <br> \
         !!time: I will tell you the current time"
+    elif "welcomeMessage" in argument():
+        return " Welcome to the Catroom. Please make sure to sign in"
     else: #command wasn't recognied. Returns error message
         return " I don't recognize that command! Please type in '!!help' to receive a list of my commands. Meow"
         
@@ -141,6 +143,9 @@ def on_new_msg(data):
             #user list -NEW
             all_users.append({
             'users': json['name']
+            })
+            socketio.emit('all users', {
+                'users': "cat.bot
             })
             socketio.emit('all users', {
                 'users': all_users
@@ -223,6 +228,10 @@ def on_new_msg(data):
                 models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
                 models.db.session.commit()
                 
+                socketio.emit('all users', {
+                'users': "cat.bot"
+            })
+            
                 socketio.emit('all msgs', {
                     'msgs': all_msgs
             }) 
