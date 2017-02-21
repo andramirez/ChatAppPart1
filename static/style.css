@@ -28,6 +28,7 @@
 #log{
   padding-top: 1px;
   flex: 1;
+  border-color: white;
 }
 #welcome{
   font-size: 30px;
@@ -47,7 +48,6 @@ img{
 #userList{
   border:solid;
   width: 200px;
-  background: blue;
 }
 body{
   background: url("http://www.publicdomainpictures.net/pictures/30000/velka/cat-on-black-background.jpg") no-repeat center center fixed; 
