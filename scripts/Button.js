@@ -14,7 +14,7 @@ export class Button extends React.Component {
                     'msg': "!!connected"
                 });
                 Socket.emit('new msg',{
-                    'msg': "!!connected"
+                    'msg': document.getElementById("msg").value
                 });
             }
         });
@@ -28,7 +28,7 @@ export class Button extends React.Component {
                 'picture': user['w3']['Paa'],
             });
             Socket.emit('new msg',{
-                    'msg': "!!connected"
+                    'msg': document.getElementById("msg").value
             });
             
         }

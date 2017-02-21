@@ -13363,7 +13363,7 @@ var Button = exports.Button = function (_React$Component) {
                         'msg': "!!connected"
                     });
                     _Socket.Socket.emit('new msg', {
-                        'msg': "!!connected"
+                        'msg': document.getElementById("msg").value
                     });
                 }
             });
@@ -13377,7 +13377,7 @@ var Button = exports.Button = function (_React$Component) {
                     'picture': user['w3']['Paa']
                 });
                 _Socket.Socket.emit('new msg', {
-                    'msg': "!!connected"
+                    'msg': document.getElementById("msg").value
                 });
             }
 
