@@ -50,7 +50,7 @@ img{
   width: 200px;
 }
 body{
-  background: url("cat.jpg") no-repeat center center fixed; 
+  background: url("https://cdn.pixabay.com/photo/2016/11/19/19/33/cat-1840854_1280.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
