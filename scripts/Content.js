@@ -9,11 +9,11 @@ export class Content extends React.Component {
         this.state = {
             'msgs': [],
         };
-      Socket.on('all msgs', (data) => {
-          this.setState({
-              'msgs': data['msgs']
-          });
-      })
+      // Socket.on('all msgs', (data) => {
+      //     this.setState({
+      //         'msgs': data['msgs']
+      //     });
+      // })
     }
     //msgs socket
     componentDidMount() {
@@ -22,12 +22,12 @@ export class Content extends React.Component {
               'msgs': data['msgs']
           });
       })
-      //users socket
-      Socket.on('all users', (data) => {
-          this.setState({
-              'users': data['users']
-          })
-      })
+      // //users socket
+      // Socket.on('all users', (data) => {
+      //     this.setState({
+      //         'users': data['users']
+      //     })
+      // })
   }
   render() {
     const style = {
@@ -64,7 +64,7 @@ export class Content extends React.Component {
         </div>
         <div id="welcomqe">Welcome to the Chat Room</div>
         <div id="msgBox">
-          <div id="welcome1">Welcome to the Chat Room</div>
+          <div id="welcome">Welcome to the Chat Room</div>
           
           <div id="chatbox" style = {chat}>
             <div id="users">Number of users: <br/>
