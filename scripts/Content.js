@@ -46,7 +46,7 @@ export class Content extends React.Component {
     
     //goes in users tag. List of users in the chat
     let users = this.state.users.map(
-            (u, user) => <li key = {user} style={style} id="users"><b>{u.name}</b></li>
+            (u, user) => <li key = {users} style={style} id="users"><b>{u.name}</b></li>
     );
     // //goes in users tag. Is the count of how many users is in the chat
     // let counts = this.state.users.map(
