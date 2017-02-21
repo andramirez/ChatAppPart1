@@ -10,9 +10,9 @@ export class Content extends React.Component {
             'msgs': [],
         };
         //NEW
-        // this.state = {
-        //   'users':[]
-        // }
+        this.state = {
+          'users':[]
+        }
     }
     //msgs socket
     componentDidMount() {
@@ -22,11 +22,11 @@ export class Content extends React.Component {
           });
       })
       //NEW
-      // Socket.on('all users', (data) => {
-      //     this.setState({
-      //         'users': data['users']
-      //     });
-      // })
+      Socket.on('all users', (data) => {
+          this.setState({
+              'users': data['users']
+          });
+      })
   }
   render() {
     const style = {
@@ -46,9 +46,9 @@ export class Content extends React.Component {
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
     //NEW
-    // let users = this.state.users.map(
-    //         (n, index) => <li key = {index} style={style} id="text2">n.users</li>
-    // );
+    let users = this.state.users.map(
+            (n, index) => <li key = {index} style={style} id="text2">n.users</li>
+    );
     
     
     return (
@@ -62,6 +62,7 @@ export class Content extends React.Component {
           <div id="chatbox" style = {chat}>
             <div id="log">{msgs}</div> 
           </div>
+          <div id="userList"><ul>{users}</ul></div>
         <Button/>
         </div>
       </div>

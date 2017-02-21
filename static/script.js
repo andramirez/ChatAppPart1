@@ -13119,9 +13119,9 @@ var Content = exports.Content = function (_React$Component) {
       'msgs': []
     };
     //NEW
-    // this.state = {
-    //   'users':[]
-    // }
+    _this.state = {
+      'users': []
+    };
     return _this;
   }
   //msgs socket
@@ -13138,11 +13138,11 @@ var Content = exports.Content = function (_React$Component) {
         });
       });
       //NEW
-      // Socket.on('all users', (data) => {
-      //     this.setState({
-      //         'users': data['users']
-      //     });
-      // })
+      _Socket.Socket.on('all users', function (data) {
+        _this2.setState({
+          'users': data['users']
+        });
+      });
     }
   }, {
     key: 'render',
@@ -13175,10 +13175,13 @@ var Content = exports.Content = function (_React$Component) {
         );
       });
       //NEW
-      // let users = this.state.users.map(
-      //         (n, index) => <li key = {index} style={style} id="text2">n.users</li>
-      // );
-
+      var users = this.state.users.map(function (n, index) {
+        return React.createElement(
+          'li',
+          { key: index, style: style, id: 'text2' },
+          'n.users'
+        );
+      });
 
       return React.createElement(
         'div',
@@ -13208,6 +13211,15 @@ var Content = exports.Content = function (_React$Component) {
               'div',
               { id: 'log' },
               msgs
+            )
+          ),
+          React.createElement(
+            'div',
+            { id: 'userList' },
+            React.createElement(
+              'ul',
+              null,
+              users
             )
           ),
           React.createElement(_Button.Button, null)
