@@ -9,11 +9,11 @@ export class Content extends React.Component {
         this.state = {
             'msgs': [],
         };
-      Socket.on('all msgs', (data) => {
-          this.setState({
-              'msgs': data['msgs']
-          });
-      })
+      // Socket.on('all msgs', (data) => {
+      //     this.setState({
+      //         'msgs': data['msgs']
+      //     });
+      // })
     }
     //msgs socket
     componentDidMount() {
@@ -23,11 +23,11 @@ export class Content extends React.Component {
           });
       })
       // //users socket
-      Socket.on('all users', (data) => {
-          this.setState({
-              'users': data['users']
-          })
-      })
+      // Socket.on('all users', (data) => {
+      //     this.setState({
+      //         'users': data['users']
+      //     })
+      // })
   }
   render() {
     const style = {
