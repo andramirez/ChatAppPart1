@@ -7,6 +7,7 @@ export class Login extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.disableMe();
+        this.loadPage();
         this.clicked = false
     }
     loadPage(){
@@ -88,7 +89,7 @@ export class Login extends React.Component {
                     className="g-signin2" 
                     data-theme="dark">
                 </div>
-                <form onLoad='loadPage()'>
+                <form onLoad={this.loadPage()}>
                   <input type="submit" id="connect" value="Make Connection"></input>
                 </form>
             </div>
