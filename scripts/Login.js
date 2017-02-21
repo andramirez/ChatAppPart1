@@ -87,7 +87,7 @@ export class Login extends React.Component {
                     className="g-signin2" 
                     data-theme="dark">
                 </div>
-                <form onLoad="loadPage()">
+                <form onLoad='loadPage()'>
                   <input type="submit" id="connect" value="Make Connection"></input>
                 </form>
             </div>
