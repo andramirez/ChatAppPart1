@@ -13127,11 +13127,11 @@ var Content = exports.Content = function (_React$Component) {
     _this.state = {
       'msgs': []
     };
-    // Socket.on('all msgs', (data) => {
-    //     this.setState({
-    //         'msgs': data['msgs']
-    //     });
-    // })
+    _Socket.Socket.on('all msgs', function (data) {
+      _this.setState({
+        'msgs': data['msgs']
+      });
+    });
     return _this;
   }
   //msgs socket
@@ -13148,11 +13148,11 @@ var Content = exports.Content = function (_React$Component) {
         });
       });
       // //users socket
-      // Socket.on('all users', (data) => {
-      //     this.setState({
-      //         'users': data['users']
-      //     })
-      // })
+      _Socket.Socket.on('all users', function (data) {
+        _this2.setState({
+          'users': data['users']
+        });
+      });
     }
   }, {
     key: 'render',
@@ -13186,7 +13186,7 @@ var Content = exports.Content = function (_React$Component) {
       var users = this.state.users.map(function (u, user) {
         return React.createElement(
           'li',
-          { key: user, style: style, id: 'users' },
+          { key: users, style: style, id: 'users' },
           React.createElement(
             'b',
             null,
