@@ -39,7 +39,6 @@ export class Login extends React.Component {
     disableMe() {
         if (document.getElementById) {
             if (this.clicked == false) {
-                document.getElementById("connect").value = "thank you";
                 return true;
             }
         } 
@@ -60,7 +59,7 @@ export class Login extends React.Component {
                     className="g-signin2" 
                     data-theme="dark">
                 </div>
-                <form onSubmit={this.handleSubmit}>
+                <form onLoad={this.handleSubmit}>
                   <input type="submit" id="connect" value="Make Connection"></input>
                 </form>
             </div>

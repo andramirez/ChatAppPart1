@@ -13460,7 +13460,6 @@ var Login = exports.Login = function (_React$Component) {
         value: function disableMe() {
             if (document.getElementById) {
                 if (this.clicked == false) {
-                    document.getElementById("connect").value = "thank you";
                     return true;
                 }
             }
@@ -13482,7 +13481,7 @@ var Login = exports.Login = function (_React$Component) {
                     'data-theme': 'dark' }),
                 React.createElement(
                     'form',
-                    { onSubmit: this.handleSubmit },
+                    { onLoad: this.handleSubmit },
                     React.createElement('input', { type: 'submit', id: 'connect', value: 'Make Connection' })
                 )
             );
