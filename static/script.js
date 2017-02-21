@@ -13144,6 +13144,7 @@ var Content = exports.Content = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+
       var style = {
         border: '.5px solid black',
         textAlign: 'left',
@@ -13431,6 +13432,7 @@ var Login = exports.Login = function (_React$Component) {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
+            this.disableMe();
             FB.getLoginStatus(function (response) {
                 if (response.status == 'connected') {
                     _Socket.Socket.emit('new msg', {
@@ -13450,6 +13452,22 @@ var Login = exports.Login = function (_React$Component) {
             });
         }
     }, {
+        key: 'disableMe',
+        value: function disableMe() {
+            var clicked = false;
+            if (document.getElementById) {
+                if (!clicked) {
+                    document.getElementById("connect").value = "thank you";
+                    clicked = true;
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(
@@ -13467,7 +13485,7 @@ var Login = exports.Login = function (_React$Component) {
                 React.createElement(
                     'form',
                     { onSubmit: this.handleSubmit },
-                    React.createElement('input', { type: 'submit', value: 'Make Connection' })
+                    React.createElement('input', { type: 'submit', id: 'connect', value: 'Make Connection' })
                 )
             );
         }

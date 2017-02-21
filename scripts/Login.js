@@ -9,6 +9,7 @@ export class Login extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
+        this.disableMe();
         FB.getLoginStatus((response) => {
             if (response.status == 'connected') {
                 Socket.emit('new msg', {
@@ -29,8 +30,24 @@ export class Login extends React.Component {
                 
             }
         });
-    
     }
+    
+    disableMe() {
+        var clicked = false;
+        if (document.getElementById) {
+            if (!clicked) {
+                document.getElementById("connect").value = "thank you";
+                clicked = true;
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+    
+    
     render() {
         return (
             <div>
@@ -46,7 +63,7 @@ export class Login extends React.Component {
                     data-theme="dark">
                 </div>
                 <form onSubmit={this.handleSubmit}>
-                  <input type="submit" value="Make Connection"></input>
+                  <input type="submit" id="connect" value="Make Connection"></input>
                 </form>
             </div>
         );

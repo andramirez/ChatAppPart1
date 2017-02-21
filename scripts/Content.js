@@ -25,7 +25,9 @@ export class Content extends React.Component {
           });
       })
   }
+    
   render() {
+    
     const style = {
       border:'.5px solid black', 
       textAlign:'left',
