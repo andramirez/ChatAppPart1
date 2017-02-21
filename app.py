@@ -145,7 +145,7 @@ def on_new_msg(data):
             'users': json['name']
             })
             socketio.emit('all users', {
-                'users': "cat.bot
+                'users': "cat.bot"
             })
             socketio.emit('all users', {
                 'users': all_users
