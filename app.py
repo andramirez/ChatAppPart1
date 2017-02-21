@@ -127,7 +127,6 @@ def on_new_msg(data):
              ##checks if bot was referenced with !!
             if "!!" in data['msg']:
                 bot = bot_msg(data['msg'])
-                bot = bot + json['name']
                 all_msgs.append({
                 'name':" bot.bot",
                 'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
@@ -139,19 +138,34 @@ def on_new_msg(data):
                 socketio.emit('all msgs', {
                     'msgs': all_msgs
             }) 
-            #Google auth not implemented.. 
     else:
-        print 'I MADE IT INTO GOOGLE';
-        response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
-        json=response.json()
-        all_msgs.append({
-            'name':" " + json['name'],
-            'picture':json['picture'],
-            'msgs':data['msg']
+        if "!! connected" in data['msg']:
+            response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
+            json=response.json()
+            bot = bot_msg(data['msg'])
+            bot = bot + json['name']
+            all_msgs.append({
+            'name':" bot.bot",
+            'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+            'msgs':bot
             })
-        socketio.emit('all msgs', {
-            'msgs': all_msgs
-        })
+            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', 'bot.bot', bot))
+            models.db.session.commit()
+            
+            socketio.emit('all msgs', {
+                'msgs': all_msgs
+            }) 
+        else:
+            response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
+            json=response.json()
+            all_msgs.append({
+                'name':" " + json['name'],
+                'picture':json['picture'],
+                'msgs':data['msg']
+                })
+            socketio.emit('all msgs', {
+                'msgs': all_msgs
+            })
         
 if __name__ == '__main__': 
     socketio.run(

@@ -17,6 +17,18 @@ export class Login extends React.Component {
                     'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                 });
             }
+            else {
+                let auth = gapi.auth2.getAuthInstance();
+                let user = auth.currentUser.get();
+                if(user.isSignedIn()){
+                    Socket.emit('new msg',{
+                        'google_user_token': user.getAuthResponse().id_token,
+                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                    });
+                    
+                }
+                
+            }
         });
     
     }
@@ -35,7 +47,7 @@ export class Login extends React.Component {
                     data-theme="dark">
                 </div>
                 <form onload={this.handleSubmit}>
-                  <input type="submit" value="Load Messages"></input>
+                  <input type="submit" value="Make Connection">Make Connection</input>
                 </form>
             </div>
         );
