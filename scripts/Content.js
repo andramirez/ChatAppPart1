@@ -11,6 +11,7 @@ export class Content extends React.Component {
              'users':[]
         };
     }
+    
     //msgs socket
     componentDidMount() {
       Socket.on('all msgs', (data) => {
@@ -54,7 +55,18 @@ export class Content extends React.Component {
       <div className="App">
           <div id="live" id = "small-container">
             <h3>Please Sign In Using Google or Facebook</h3>
-            <Login/>          
+            <Login/>   
+            <div
+                    className="fb-login-button"
+                    data-max-rows="1"
+                    data-size="medium"
+                    data-show-faces="false"
+                    data-auto-logout-link="true">
+                </div>
+                <div 
+                    className="g-signin2" 
+                    data-theme="dark">
+                </div>
         </div>
         <div id="msgBox">
           <div id="welcome">Welcome to the Cat Room</div>

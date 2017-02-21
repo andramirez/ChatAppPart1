@@ -228,11 +228,14 @@ def on_new_msg(data):
                 models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
                 models.db.session.commit()
                 
-                socketio.emit('all users', {
+            all_users.append({
                 'users': "cat.bot"
             })
+            socketio.emit('all users', {
+                    'users': all_users
+            })
             
-                socketio.emit('all msgs', {
+            socketio.emit('all msgs', {
                     'msgs': all_msgs
             }) 
         
