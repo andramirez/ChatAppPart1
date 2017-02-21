@@ -10,11 +10,11 @@ export class Login extends React.Component {
         this.loadPage();
         this.clicked = false
     }
-    loadPage(){
-            Socket.emit('new msg', {
-                        'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                    });
-    }
+    // loadPage(){
+    //         Socket.emit('new msg', {
+    //                     'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+    //                 });
+    // }
     
     handleSubmit(event) {
         event.preventDefault();
@@ -50,13 +50,6 @@ export class Login extends React.Component {
             }
         } 
     }
-            //     FB.logout(function(response) {
-            //   // user is now logged out
-            //         Socket.emit('new msg', {
-            //             'facebook_user_token': response.authResponse.accessToken,
-            //             'msg': '!! disconnected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-            //         });
-            // });
     
     render() {
         return (
@@ -72,7 +65,7 @@ export class Login extends React.Component {
                     className="g-signin2" 
                     data-theme="dark">
                 </div>
-                <form onLoad={this.loadPage()}>
+                <form onSubmit={this.handleSubmit}>
                   <input type="submit" id="connect" value="Make Connection"></input>
                 </form>
             </div>
