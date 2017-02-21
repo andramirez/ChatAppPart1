@@ -13431,30 +13431,54 @@ var Login = exports.Login = function (_React$Component) {
     }
 
     _createClass(Login, [{
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            event.preventDefault();
-            if (this.disableMe()) {
-                this.clicked = true;
-                FB.getLoginStatus(function (response) {
-                    if (response.status == 'connected') {
+        key: 'loadPage',
+        value: function loadPage() {
+            FB.getLoginStatus(function (response) {
+                if (response.status == 'connected') {
+                    _Socket.Socket.emit('new msg', {
+                        'facebook_user_token': response.authResponse.accessToken,
+                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                    });
+                } else {
+                    var auth = gapi.auth2.getAuthInstance();
+                    var user = auth.currentUser.get();
+                    if (user.isSignedIn()) {
                         _Socket.Socket.emit('new msg', {
-                            'facebook_user_token': response.authResponse.accessToken,
+                            'google_user_token': user.getAuthResponse().id_token,
                             'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                         });
-                    } else {
-                        var auth = gapi.auth2.getAuthInstance();
-                        var user = auth.currentUser.get();
-                        if (user.isSignedIn()) {
-                            _Socket.Socket.emit('new msg', {
-                                'google_user_token': user.getAuthResponse().id_token,
-                                'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                            });
-                        }
                     }
-                });
-            }
+                }
+            });
         }
+        // handleSubmit(event) {
+        //     event.preventDefault();
+        //     if(this.disableMe())
+        //     {
+        //         this.clicked = true;
+        //         FB.getLoginStatus((response) => {
+        //             if (response.status == 'connected') {
+        //                 Socket.emit('new msg', {
+        //                     'facebook_user_token': response.authResponse.accessToken,
+        //                     'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+        //                 });
+        //             }
+        //             else {
+        //                 let auth = gapi.auth2.getAuthInstance();
+        //                 let user = auth.currentUser.get();
+        //                 if(user.isSignedIn()){
+        //                     Socket.emit('new msg',{
+        //                         'google_user_token': user.getAuthResponse().id_token,
+        //                         'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+        //                     });
+
+        //                 }
+
+        //             }
+        //         });
+        //     }
+        // }
+
     }, {
         key: 'disableMe',
         value: function disableMe() {
@@ -13464,6 +13488,14 @@ var Login = exports.Login = function (_React$Component) {
                 }
             }
         }
+        //     FB.logout(function(response) {
+        //   // user is now logged out
+        //         Socket.emit('new msg', {
+        //             'facebook_user_token': response.authResponse.accessToken,
+        //             'msg': '!! disconnected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+        //         });
+        // });
+
     }, {
         key: 'render',
         value: function render() {
@@ -13481,7 +13513,7 @@ var Login = exports.Login = function (_React$Component) {
                     'data-theme': 'dark' }),
                 React.createElement(
                     'form',
-                    { onLoad: this.handleSubmit },
+                    { onLoad: 'loadPage()' },
                     React.createElement('input', { type: 'submit', id: 'connect', value: 'Make Connection' })
                 )
             );
