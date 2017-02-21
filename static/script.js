@@ -13356,17 +13356,19 @@ var Button = exports.Button = function (_React$Component) {
                         'facebook_user_token': response.authResponse.accessToken,
                         'msg': document.getElementById("msg").value
                     });
-                } else {
-                    var auth = gapi.auth2.getAuthInstance();
-                    var user = auth.currentUser.get();
-                    if (user.isSignedIn()) {
-                        _Socket.Socket.emit('new msg', {
-                            'google_user_token': user.getAuthResponse().id_token,
-                            'msg': document.getElementById("msg").value
-                        });
-                    }
                 }
             });
+            var auth = gapi.auth2.getAuthInstance();
+            var user = auth.currentUser.get();
+            if (user.isSignedIn()) {
+                _Socket.Socket.emit('new msg', {
+                    'google_user_token': user.getAuthResponse().id_token,
+                    'msg': document.getElementById("msg").value,
+                    'name': user['w3']['ig'],
+                    'picture': user['w3']['Paa']
+                });
+            }
+
             document.getElementById("msg").value = "";
         }
     }, {
@@ -13450,17 +13452,16 @@ var Login = exports.Login = function (_React$Component) {
                             'facebook_user_token': response.authResponse.accessToken,
                             'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                         });
-                    } else {
-                        var auth = gapi.auth2.getAuthInstance();
-                        var user = auth.currentUser.get();
-                        if (user.isSignedIn()) {
-                            _Socket.Socket.emit('new msg', {
-                                'google_user_token': user.getAuthResponse().id_token,
-                                'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                            });
-                        }
                     }
                 });
+                var auth = gapi.auth2.getAuthInstance();
+                var user = auth.currentUser.get();
+                if (user.isSignedIn()) {
+                    _Socket.Socket.emit('new msg', {
+                        'google_user_token': user.getAuthResponse().id_token,
+                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                    });
+                }
             }
         }
     }, {
@@ -13472,14 +13473,6 @@ var Login = exports.Login = function (_React$Component) {
                 }
             }
         }
-        //     FB.logout(function(response) {
-        //   // user is now logged out
-        //         Socket.emit('new msg', {
-        //             'facebook_user_token': response.authResponse.accessToken,
-        //             'msg': '!! disconnected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-        //         });
-        // });
-
     }, {
         key: 'render',
         value: function render() {
@@ -13497,7 +13490,7 @@ var Login = exports.Login = function (_React$Component) {
                     'data-theme': 'dark' }),
                 React.createElement(
                     'form',
-                    { onLoad: this.loadPage() },
+                    { onSubmit: this.handleSubmit },
                     React.createElement('input', { type: 'submit', id: 'connect', value: 'Make Connection' })
                 )
             );

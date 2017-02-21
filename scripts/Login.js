@@ -10,11 +10,11 @@ export class Login extends React.Component {
         this.loadPage();
         this.clicked = false
     }
-    // loadPage(){
-    //         Socket.emit('new msg', {
-    //                     'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-    //                 });
-    // }
+    loadPage(){
+            Socket.emit('new msg', {
+                        'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                    });
+    }
     
     handleSubmit(event) {
         event.preventDefault();
@@ -28,19 +28,16 @@ export class Login extends React.Component {
                         'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                     });
                 }
-                else {
-                    let auth = gapi.auth2.getAuthInstance();
-                    let user = auth.currentUser.get();
-                    if(user.isSignedIn()){
-                        Socket.emit('new msg',{
-                            'google_user_token': user.getAuthResponse().id_token,
-                            'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                        });
-                        
-                    }
-                    
-                }
             });
+            let auth = gapi.auth2.getAuthInstance();
+            let user = auth.currentUser.get();
+            if(user.isSignedIn()){
+                Socket.emit('new msg',{
+                    'google_user_token': user.getAuthResponse().id_token,
+                    'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                });
+                
+            }
         }
     }
     disableMe() {

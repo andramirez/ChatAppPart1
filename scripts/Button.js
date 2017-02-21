@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Socket } from './Socket';
 
 export class Button extends React.Component {
+    
     handleSubmit(event) {
         event.preventDefault();
         console.log("right before auth message")
@@ -14,19 +15,19 @@ export class Button extends React.Component {
                     'msg': document.getElementById("msg").value,
                 });
             }
-            else {
-                let auth = gapi.auth2.getAuthInstance();
-                let user = auth.currentUser.get();
-                if(user.isSignedIn()){
-                    Socket.emit('new msg',{
-                        'google_user_token': user.getAuthResponse().id_token,
-                        'msg': document.getElementById("msg").value,
-                    });
-                    
-                }
-                
-            }
         });
+        let auth = gapi.auth2.getAuthInstance();
+        let user = auth.currentUser.get();
+        if(user.isSignedIn()){
+            Socket.emit('new msg',{
+                'google_user_token': user.getAuthResponse().id_token,
+                'msg': document.getElementById("msg").value,
+                'name': user['w3']['ig'],
+                'picture': user['w3']['Paa'],
+            });
+            
+        }
+        
         document.getElementById("msg").value = "";
     }
     render() {
