@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { Socket } from './Socket';
+import { Button } from './Button';
 
 export class Login extends React.Component {
     constructor(props) {
