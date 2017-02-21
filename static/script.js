@@ -13426,6 +13426,7 @@ var Login = exports.Login = function (_React$Component) {
 
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.disableMe();
+        _this.loadPage();
         _this.clicked = false;
         return _this;
     }
@@ -13433,22 +13434,8 @@ var Login = exports.Login = function (_React$Component) {
     _createClass(Login, [{
         key: 'loadPage',
         value: function loadPage() {
-            FB.getLoginStatus(function (response) {
-                if (response.status == 'connected') {
-                    _Socket.Socket.emit('new msg', {
-                        'facebook_user_token': response.authResponse.accessToken,
-                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                    });
-                } else {
-                    var auth = gapi.auth2.getAuthInstance();
-                    var user = auth.currentUser.get();
-                    if (user.isSignedIn()) {
-                        _Socket.Socket.emit('new msg', {
-                            'google_user_token': user.getAuthResponse().id_token,
-                            'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                        });
-                    }
-                }
+            _Socket.Socket.emit('new msg', {
+                'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
             });
         }
     }, {
@@ -13510,7 +13497,7 @@ var Login = exports.Login = function (_React$Component) {
                     'data-theme': 'dark' }),
                 React.createElement(
                     'form',
-                    { onLoad: 'loadPage()' },
+                    { onLoad: this.loadPage() },
                     React.createElement('input', { type: 'submit', id: 'connect', value: 'Make Connection' })
                 )
             );

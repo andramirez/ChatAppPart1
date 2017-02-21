@@ -40,6 +40,8 @@ def on_disconnect():
 def bot_msg(argument):
     if "hello" in argument.lower(): #returns a greeting
         return " Hello, there! Meow"
+    if "!! welcomeMessage" in argument():
+        return " Welcome to the Catroom. Please make sure to sign in"
     elif "riddle" in argument.lower(): #returns a riddle
         riddles = {
             1: "The more you take, the more you leave behind. What am I? Type '!!answer' for the answer",
@@ -100,6 +102,27 @@ def bot_msg(argument):
 ## appending all aspects of message
 @socketio.on('new msg')
 def on_new_msg(data):
+    if "!! welcomeMessage" in data['msg']:
+            bot = bot_msg(data['msg'])
+            bot = bot
+            all_msgs.append({
+            'name':" cat.bot",
+            'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
+            'msgs':bot
+            })
+            models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
+            models.db.session.commit()
+            
+            socketio.emit('all msgs', {
+                'msgs': all_msgs
+            }) 
+            #user list -NEW
+            all_users.append({
+            'users': "cat.bot"
+            })
+            socketio.emit('all users', {
+                'users': all_users
+            })
     if 'facebook_user_token' in data:
         if "!! connected" in data['msg']:
             response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
@@ -118,9 +141,6 @@ def on_new_msg(data):
                 'msgs': all_msgs
             }) 
             #user list -NEW
-            all_users.append({
-            'users': "cat.bot"
-            })
             all_users.append({
             'users': json['name']
             })
