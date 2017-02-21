@@ -8,11 +8,8 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'msgs': [],
+             'users':[]
         };
-        //NEW
-        this.state = {
-          'users':[]
-        }
     }
     //msgs socket
     componentDidMount() {
@@ -47,7 +44,7 @@ export class Content extends React.Component {
     );
     //NEW
     let users = this.state.users.map(
-            (n, index) => <li key = {index} style={style} id="text2">n.users</li>
+            (m, index1) => <li key = {index1}  id="text2">m.users</li>
     );
     
     

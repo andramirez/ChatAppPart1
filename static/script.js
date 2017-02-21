@@ -13116,10 +13116,7 @@ var Content = exports.Content = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 
     _this.state = {
-      'msgs': []
-    };
-    //NEW
-    _this.state = {
+      'msgs': [],
       'users': []
     };
     return _this;
@@ -13175,11 +13172,11 @@ var Content = exports.Content = function (_React$Component) {
         );
       });
       //NEW
-      var users = this.state.users.map(function (n, index) {
+      var users = this.state.users.map(function (m, index1) {
         return React.createElement(
           'li',
-          { key: index, style: style, id: 'text2' },
-          'n.users'
+          { key: index1, id: 'text2' },
+          'm.users'
         );
       });
 
