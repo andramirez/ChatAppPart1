@@ -13433,13 +13433,15 @@ var Login = exports.Login = function (_React$Component) {
         _this.clicked = false;
         return _this;
     }
-    // loadPage(){
-    //         Socket.emit('new msg', {
-    //                     'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-    //                 });
-    // }
 
     _createClass(Login, [{
+        key: 'loadPage',
+        value: function loadPage() {
+            _Socket.Socket.emit('new msg', {
+                'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+            });
+        }
+    }, {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
@@ -13458,7 +13460,9 @@ var Login = exports.Login = function (_React$Component) {
                 if (user.isSignedIn()) {
                     _Socket.Socket.emit('new msg', {
                         'google_user_token': user.getAuthResponse().id_token,
-                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                        'msg': '!! connected', //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                        'name': user['w3']['ig'],
+                        'picture': user['w3']['Paa']
                     });
                 }
             }
@@ -13487,6 +13491,7 @@ var Login = exports.Login = function (_React$Component) {
                 React.createElement('div', {
                     className: 'g-signin2',
                     'data-theme': 'dark' }),
+                React.createElement('form', { onLoad: this.loadPage }),
                 React.createElement(
                     'form',
                     { onSubmit: this.handleSubmit },

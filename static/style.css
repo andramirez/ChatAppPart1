@@ -18,7 +18,7 @@
   vertical-align:top;
 }
 #chatbox{ 
-  /*width: 840px;*/
+  width: 640px;
   margin-top: 40px;
   height:400px;
   background-color: rgba(190, 190, 190, .75);
