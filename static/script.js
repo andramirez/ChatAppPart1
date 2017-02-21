@@ -13443,7 +13443,7 @@ var Login = exports.Login = function (_React$Component) {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
-            if (this.disableMe()) {
+            if (!this.disableMe()) {
                 this.clicked = true;
                 FB.getLoginStatus(function (response) {
                     if (response.status == 'connected') {
