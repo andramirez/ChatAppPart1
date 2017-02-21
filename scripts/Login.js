@@ -46,7 +46,7 @@ export class Login extends React.Component {
                     data-theme="dark">
                 </div>
                 <form onSubmit={this.handleSubmit}>
-                  <input type="submit" value="Make Connection">Make Connection</input>
+                  <input type="submit" value="Make Connection"></input>
                 </form>
             </div>
         );

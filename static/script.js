@@ -13458,11 +13458,7 @@ var Login = exports.Login = function (_React$Component) {
                 React.createElement(
                     'form',
                     { onSubmit: this.handleSubmit },
-                    React.createElement(
-                        'input',
-                        { type: 'submit', value: 'Make Connection' },
-                        'Make Connection'
-                    )
+                    React.createElement('input', { type: 'submit', value: 'Make Connection' })
                 )
             );
         }
