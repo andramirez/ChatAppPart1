@@ -13148,6 +13148,7 @@ var Content = exports.Content = function (_React$Component) {
         border: '.5px solid black',
         textAlign: 'left',
         padding: '2px',
+        width: '840px',
         whitespace: 'nowrap',
         overflow: 'hidden',
         textoverflow: 'ellipsis'
@@ -13171,11 +13172,11 @@ var Content = exports.Content = function (_React$Component) {
         );
       });
       //NEW
-      var users = this.state.users.map(function (m, index1) {
+      var users = this.state.users.map(function (n, index) {
         return React.createElement(
           'li',
-          { key: index1, id: 'text2' },
-          'm.users'
+          { key: index, id: 'text2' },
+          n.users
         );
       });
 

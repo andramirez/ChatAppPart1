@@ -30,6 +30,7 @@ export class Content extends React.Component {
       border:'.5px solid black', 
       textAlign:'left',
       padding:'2px',
+      width: '840px',
       whitespace: 'nowrap',
       overflow: 'hidden',
       textoverflow: 'ellipsis'
@@ -43,7 +44,7 @@ export class Content extends React.Component {
     );
     //NEW
     let users = this.state.users.map(
-            (m, index1) => <li key = {index1}  id="text2">m.users</li>
+            (n, index) => <li key = {index}  id="text2">{n.users}</li>
     );
     
     
