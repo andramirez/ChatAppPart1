@@ -40,7 +40,7 @@ def on_disconnect():
 def bot_msg(argument):
     if "hello" in argument.lower(): #returns a greeting
         return " Hello, there! Meow"
-    if "!! welcomeMessage" in argument():
+    elif "!! welcomeMessage" in argument():
         return " Welcome to the Catroom. Please make sure to sign in"
     elif "riddle" in argument.lower(): #returns a riddle
         riddles = {
