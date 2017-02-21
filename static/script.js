@@ -13356,12 +13356,14 @@ var Button = exports.Button = function (_React$Component) {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
-            console.log("right before auth message");
             FB.getLoginStatus(function (response) {
                 if (response.status == 'connected') {
                     _Socket.Socket.emit('new msg', {
                         'facebook_user_token': response.authResponse.accessToken,
-                        'msg': document.getElementById("msg").value
+                        'msg': "!!connected"
+                    });
+                    _Socket.Socket.emit('new msg', {
+                        'msg': "!!connected"
                     });
                 }
             });
@@ -13370,9 +13372,12 @@ var Button = exports.Button = function (_React$Component) {
             if (user.isSignedIn()) {
                 _Socket.Socket.emit('new msg', {
                     'google_user_token': user.getAuthResponse().id_token,
-                    'msg': document.getElementById("msg").value,
+                    'msg': "!!connected",
                     'name': user['w3']['ig'],
                     'picture': user['w3']['Paa']
+                });
+                _Socket.Socket.emit('new msg', {
+                    'msg': "!!connected"
                 });
             }
 

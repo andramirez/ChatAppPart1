@@ -6,13 +6,15 @@ export class Button extends React.Component {
     
     handleSubmit(event) {
         event.preventDefault();
-        console.log("right before auth message")
         FB.getLoginStatus((response)=>{
             if(response.status=='connected'){
                 Socket.emit('new msg',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
-                    'msg': document.getElementById("msg").value,
+                    'msg': "!!connected"
+                });
+                Socket.emit('new msg',{
+                    'msg': "!!connected"
                 });
             }
         });
@@ -21,9 +23,12 @@ export class Button extends React.Component {
         if(user.isSignedIn()){
             Socket.emit('new msg',{
                 'google_user_token': user.getAuthResponse().id_token,
-                'msg': document.getElementById("msg").value,
+                'msg': "!!connected",
                 'name': user['w3']['ig'],
                 'picture': user['w3']['Paa'],
+            });
+            Socket.emit('new msg',{
+                    'msg': "!!connected"
             });
             
         }
@@ -33,8 +38,8 @@ export class Button extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-            <textarea id="msg" rows="4" cols="50" placeholder="Please insert text"></textarea> 
-            <button id="b1">Send</button>
+                <textarea id="msg" rows="4" cols="50" placeholder="Please insert text"></textarea> 
+                <button id="b1">Send</button>
             </form>
         );
     }
