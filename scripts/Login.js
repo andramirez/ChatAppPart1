@@ -9,27 +9,29 @@ export class Login extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        this.disableMe();
-        FB.getLoginStatus((response) => {
-            if (response.status == 'connected') {
-                Socket.emit('new msg', {
-                    'facebook_user_token': response.authResponse.accessToken,
-                    'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                });
-            }
-            else {
-                let auth = gapi.auth2.getAuthInstance();
-                let user = auth.currentUser.get();
-                if(user.isSignedIn()){
-                    Socket.emit('new msg',{
-                        'google_user_token': user.getAuthResponse().id_token,
+        if(!this.disableMe())
+        {
+            FB.getLoginStatus((response) => {
+                if (response.status == 'connected') {
+                    Socket.emit('new msg', {
+                        'facebook_user_token': response.authResponse.accessToken,
                         'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                     });
+                }
+                else {
+                    let auth = gapi.auth2.getAuthInstance();
+                    let user = auth.currentUser.get();
+                    if(user.isSignedIn()){
+                        Socket.emit('new msg',{
+                            'google_user_token': user.getAuthResponse().id_token,
+                            'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                        });
+                        
+                    }
                     
                 }
-                
-            }
-        });
+            });
+        }
     }
     
     disableMe() {
@@ -39,12 +41,8 @@ export class Login extends React.Component {
                 document.getElementById("connect").value = "thank you";
                 clicked = true;
                 return true;
-            } else {
-                return false;
             }
-        } else {
-            return true;
-        }
+        } 
     }
     
     
