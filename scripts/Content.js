@@ -9,12 +9,22 @@ export class Content extends React.Component {
         this.state = {
             'msgs': [],
         };
+        //NEW
+        this.state = {
+          'users':[]
+        }
     }
     //msgs socket
     componentDidMount() {
       Socket.on('all msgs', (data) => {
           this.setState({
               'msgs': data['msgs']
+          });
+      })
+      //NEW
+      Socket.on('all users', (data) => {
+          this.setState({
+              'users': data['users']
           });
       })
   }
@@ -35,6 +45,10 @@ export class Content extends React.Component {
     let msgs = this.state.msgs.map(
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
+    //NEW
+    let users = this.state.users.map(
+            (n, index) => <li key = {index} style={style} id="text2">n.users</li>
+    );
     
     
     return (
@@ -44,10 +58,11 @@ export class Content extends React.Component {
             <Login/>          
         </div>
         <div id="msgBox">
-          <div id="welcome">Welcome to the Chat Room</div>
+          <div id="welcome">Welcome to the Cat Room</div>
           <div id="chatbox" style = {chat}>
             <div id="log">{msgs}</div> 
           </div>
+          <div id="userList"><ul>{users}</ul></div>
         <Button/>
         </div>
       </div>

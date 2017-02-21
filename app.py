@@ -12,6 +12,7 @@ socketio = flask_socketio.SocketIO(app)
 import models
 
 all_msgs = []
+all_users = [] #-NEW
 global riddle
 riddle = 0;
 ##current database print out
@@ -38,7 +39,7 @@ def on_disconnect():
 #bot messages    
 def bot_msg(argument):
     if "hello" in argument.lower(): #returns a greeting
-        return " Hello, there!"
+        return " Hello, there! Meow"
     elif "riddle" in argument.lower(): #returns a riddle
         riddles = {
             1: "The more you take, the more you leave behind. What am I? Type '!!answer' for the answer",
@@ -58,7 +59,7 @@ def bot_msg(argument):
     elif "answer" in argument.lower(): #returns answer to riddle
         print riddle
         if(riddle == 0):
-            return "You haven't received a riddle yet! <br/>To ask for a riddle, type: '!!riddle'"
+            return "You haven't received a riddle yet! <br>To ask for a riddle, type: '!!riddle'"
         else:
             index = riddle
             riddle = 0
@@ -78,15 +79,22 @@ def bot_msg(argument):
     elif "connected" in argument.lower(): #returns user connected message
         return " A user has connected! Name: "
     elif "about" in argument.lower(): # returns description
-        return " Welcome to the Chat Room! Feel free to send messages to each other or to me!"
+        return " Welcome to the Chat Room! Feel free to send messages to each other or to me! Meow"
     elif "time" in argument.lower(): #returns current time
-        return " The current time is: " + time.strftime("%I:%M:%S")
+        return " The current time is: " + time.strftime("%I:%M:%S") + " Meow"
     elif "say" in argument.lower(): #returns message sent by user
-        return argument.split("say")[1]
+        return argument.split("say")[1] + ". I mean.... meow.."
     elif "help" in argument.lower(): # returns list of commands
-        return " Current Commands:<br/> !!hello: replies with a greeting<br/>!!about: gives description of chatroom<br/> !!help: returns known commands<br/> !!say <something>: has bot repeat message"
+        return " Current Commands: <br> \
+        !!hello: I will greet you <br> \
+        !!about: I'll tell you about the cat room <br> \
+        !!help: I will tell you known commands <br> \
+        !!say <something>: has bot repeat message <br> \
+        !!riddle: I will ask you a riddle <br> \
+        !!answer: I will answer the riddle. Only after you've asked, though <br> \
+        !!time: I will tell you the current time"
     else: #command wasn't recognied. Returns error message
-        return " I don't recognize that command! Please type in '!!help' to receive a list of my commands"
+        return " I don't recognize that command! Please type in '!!help' to receive a list of my commands. Meow"
         
 
 ## appending all aspects of message
@@ -99,16 +107,26 @@ def on_new_msg(data):
             bot = bot_msg(data['msg'])
             bot = bot + json['name']
             all_msgs.append({
-            'name':" bot.bot",
-            'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+            'name':" cat.bot",
+            'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
             'msgs':bot
             })
-            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', 'bot.bot', bot))
+            models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
                 'msgs': all_msgs
             }) 
+            #user list -NEW
+            all_users.append({
+            'users': "cat.bot"
+            })
+            all_users.append({
+            'users': json['name']
+            })
+            socketio.emit('all users', {
+                'users': all_users
+            })
         else:
             response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
             json=response.json()
@@ -128,11 +146,11 @@ def on_new_msg(data):
             if "!!" in data['msg']:
                 bot = bot_msg(data['msg'])
                 all_msgs.append({
-                'name':" bot.bot",
-                'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+                'name':" cat.bot",
+                'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
                 'msgs':bot
                 })
-                models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', 'bot.bot', bot))
+                models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
                 models.db.session.commit()
                 
                 socketio.emit('all msgs', {
@@ -145,16 +163,26 @@ def on_new_msg(data):
             bot = bot_msg(data['msg'])
             bot = bot + json['name']
             all_msgs.append({
-            'name':" bot.bot",
-            'picture':"https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67",
+            'name':" cat.bot",
+            'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
             'msgs':bot
             })
-            models.db.session.add(models.Message(u'https://camo.githubusercontent.com/95cd3ddb1c8f475ae0893a711d470c1bd4fd67d1/687474703a2f2f696d616765732e736f6674776172652e636f6d2f6d61632e636f6d2e666c69706c6576656c2e63686174626f742f69636f6e2d3132382e706e67', 'bot.bot', bot))
+            models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
                 'msgs': all_msgs
             }) 
+            # user list -NEW
+            all_users.append({
+            'users': "cat.bot"
+            })
+            all_users.append({
+            'users': json['name']
+            })
+            socketio.emit('all users', {
+                'users': all_users
+            })
         else:
             response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
             json=response.json()
@@ -166,6 +194,20 @@ def on_new_msg(data):
             socketio.emit('all msgs', {
                 'msgs': all_msgs
             })
+            
+            if "!!" in data['msg']:
+                bot = bot_msg(data['msg'])
+                all_msgs.append({
+                'name':" cat.bot",
+                'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
+                'msgs':bot
+                })
+                models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
+                models.db.session.commit()
+                
+                socketio.emit('all msgs', {
+                    'msgs': all_msgs
+            }) 
         
 if __name__ == '__main__': 
     socketio.run(
