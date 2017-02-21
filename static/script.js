@@ -13199,7 +13199,7 @@ var Content = exports.Content = function (_React$Component) {
           React.createElement(
             'div',
             { id: 'welcome' },
-            'Welcome to the Cat Rooms'
+            'Welcome to the Cat Room'
           ),
           React.createElement(
             'div',
@@ -13208,15 +13208,15 @@ var Content = exports.Content = function (_React$Component) {
               'div',
               { id: 'log' },
               msgs
-            )
-          ),
-          React.createElement(
-            'div',
-            { id: 'userList' },
+            ),
             React.createElement(
-              'ul',
-              null,
-              users
+              'div',
+              { id: 'userList' },
+              React.createElement(
+                'ul',
+                null,
+                users
+              )
             )
           ),
           React.createElement(_Button.Button, null)

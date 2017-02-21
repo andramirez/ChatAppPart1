@@ -55,11 +55,11 @@ export class Content extends React.Component {
             <Login/>          
         </div>
         <div id="msgBox">
-          <div id="welcome">Welcome to the Cat Rooms</div>
+          <div id="welcome">Welcome to the Cat Room</div>
           <div id="chatbox" style = {chat}>
             <div id="log">{msgs}</div> 
+            <div id="userList"><ul>{users}</ul></div>
           </div>
-          <div id="userList"><ul>{users}</ul></div>
         <Button/>
         </div>
       </div>
