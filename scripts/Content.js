@@ -9,11 +9,6 @@ export class Content extends React.Component {
         this.state = {
             'msgs': [],
         };
-      // Socket.on('all msgs', (data) => {
-      //     this.setState({
-      //         'msgs': data['msgs']
-      //     });
-      // })
     }
     //msgs socket
     componentDidMount() {
@@ -22,16 +17,13 @@ export class Content extends React.Component {
               'msgs': data['msgs']
           });
       })
-      // //users socket
-      // Socket.on('all users', (data) => {
-      //     this.setState({
-      //         'users': data['users']
-      //     })
-      // })
   }
   render() {
     const style = {
       border:'.5px solid black', 
+      textAlign:'left',
+      padding:'2px',
+      width: '695px',
       whitespace: 'nowrap',
       overflow: 'hidden',
       textoverflow: 'ellipsis'
@@ -44,32 +36,16 @@ export class Content extends React.Component {
             (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
     
-    //goes in users tag. List of users in the chat
-    let users = this.state.users.map(
-            (u, user) => <li key = {users} style={style} id="users"><b>{u.name}</b></li>
-    );
-    // //goes in users tag. Is the count of how many users is in the chat
-    // let counts = this.state.users.map(
-    //         (c, count) => <div key = {count} id="count"><b>{c.count}</b></div>
-    // );
-    // jQuery(document).ready(function(){       
-    //   var $t = $('#log');
-    //   $t.animate({"scrollTop": $('#log')[0].scrollHeight}, "faster");
-    // });
     
     return (
       <div className="App">
-        <div id="live" id = "small-container">
-          <Login/>   
+          <div id="live" id = "small-container">
+            <h3>Please Sign In Using Google or Facebook</h3>
+            <Login/>          
         </div>
-        <div id="welcomqe">Welcome to the Chat Room</div>
         <div id="msgBox">
           <div id="welcome">Welcome to the Chat Room</div>
-          
           <div id="chatbox" style = {chat}>
-            <div id="users">Number of users: <br/>
-            <ul>{users}</ul>
-          </div>
             <div id="log">{msgs}</div> 
           </div>
         <Button/>

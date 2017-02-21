@@ -14,7 +14,6 @@ import models
 all_msgs = []
 global riddle
 riddle = 0;
-all_users = []
 ##current database print out
 @app.route('/')
 
@@ -95,18 +94,6 @@ def bot_msg(argument):
 ## appending all aspects of message
 @socketio.on('new msg')
 def on_new_msg(data):
-    ##Facebook login
-    # if "!!connect" in data['msg']:
-    #     response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
-    #     json=response.json()
-    #     count = len(all + 1)
-    #     all_users.append({ ##retrieving facebook data
-    #         'name':json['name'],
-    #         'count': count
-    #     })
-    #     # socketio.emit('all users', {
-    #     #     'users': all_users
-    #     # })
     if 'facebook_user_token' in data:
         response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
         json=response.json()

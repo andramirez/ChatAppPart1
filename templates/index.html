@@ -4,13 +4,6 @@
             Chatroom Web App
         </title>
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
-        <meta 
-        name="google-signin-scope"
-        content="profile email"/>
-        <meta 
-        name="google-signin-client_id" 
-        content="985898840926-hgsdmkcas5969msavv6oe3tf4e651k5d.apps.googleusercontent.com"/>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body background='http://wallpapercave.com/wp/zm8bgId.jpg'>
       <script>
@@ -31,9 +24,10 @@
         fjs.parentNode.insertBefore(js,fjs);
         }(document,'script','facebook-jssdk'));
       </script>
+      
         <div class="container">
-        <div id="content"></div>
-        <script type="text/javascript" src="/static/script.js"></script>
+          <div id="content"></div>
+          <script type="text/javascript" src="/static/script.js"></script>
         </div>
     </body>
 </html>

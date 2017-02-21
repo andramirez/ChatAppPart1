@@ -16,22 +16,18 @@ export class Login extends React.Component {
                     'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                 });
             }
-            Socket.emit('new user', {
-                    'facebook_user_token': response.authResponse.accessToken,
-                });
-                console.log("second socket done")
         });
     
     }
     render() {
         return (
             <div>
-                <div>
+                <div
                     className="fb-login-button"
                     data-max-rows="1"
                     data-size="medium"
                     data-show-faces="false"
-                    data-auto-logout-link="true"
+                    data-auto-logout-link="true">
                 </div>
                 <div 
                 className="g-signin2" 
