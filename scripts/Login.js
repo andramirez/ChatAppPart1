@@ -13,6 +13,7 @@ export class Login extends React.Component {
         event.preventDefault();
         if(!this.disableMe())
         {
+            this.clicked = true;
             FB.getLoginStatus((response) => {
                 if (response.status == 'connected') {
                     Socket.emit('new msg', {
@@ -39,7 +40,6 @@ export class Login extends React.Component {
         if (document.getElementById) {
             if (this.clicked == false) {
                 document.getElementById("connect").value = "thank you";
-                this.clicked = true;
                 return true;
             }
         } 

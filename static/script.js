@@ -13435,6 +13435,7 @@ var Login = exports.Login = function (_React$Component) {
         value: function handleSubmit(event) {
             event.preventDefault();
             if (!this.disableMe()) {
+                this.clicked = true;
                 FB.getLoginStatus(function (response) {
                     if (response.status == 'connected') {
                         _Socket.Socket.emit('new msg', {
@@ -13460,7 +13461,6 @@ var Login = exports.Login = function (_React$Component) {
             if (document.getElementById) {
                 if (this.clicked == false) {
                     document.getElementById("connect").value = "thank you";
-                    this.clicked = true;
                     return true;
                 }
             }
