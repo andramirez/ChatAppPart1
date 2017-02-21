@@ -13425,6 +13425,8 @@ var Login = exports.Login = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
         _this.handleSubmit = _this.handleSubmit.bind(_this);
+        _this.disableMe();
+        _this.clicked = false;
         return _this;
     }
 
@@ -13432,39 +13434,35 @@ var Login = exports.Login = function (_React$Component) {
         key: 'handleSubmit',
         value: function handleSubmit(event) {
             event.preventDefault();
-            this.disableMe();
-            FB.getLoginStatus(function (response) {
-                if (response.status == 'connected') {
-                    _Socket.Socket.emit('new msg', {
-                        'facebook_user_token': response.authResponse.accessToken,
-                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                    });
-                } else {
-                    var auth = gapi.auth2.getAuthInstance();
-                    var user = auth.currentUser.get();
-                    if (user.isSignedIn()) {
+            if (!this.disableMe()) {
+                FB.getLoginStatus(function (response) {
+                    if (response.status == 'connected') {
                         _Socket.Socket.emit('new msg', {
-                            'google_user_token': user.getAuthResponse().id_token,
+                            'facebook_user_token': response.authResponse.accessToken,
                             'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                         });
+                    } else {
+                        var auth = gapi.auth2.getAuthInstance();
+                        var user = auth.currentUser.get();
+                        if (user.isSignedIn()) {
+                            _Socket.Socket.emit('new msg', {
+                                'google_user_token': user.getAuthResponse().id_token,
+                                'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }, {
         key: 'disableMe',
         value: function disableMe() {
-            var clicked = false;
             if (document.getElementById) {
-                if (!clicked) {
+                if (this.clicked == false) {
                     document.getElementById("connect").value = "thank you";
-                    clicked = true;
+                    this.clicked = true;
                     return true;
-                } else {
-                    return false;
                 }
-            } else {
-                return true;
             }
         }
     }, {

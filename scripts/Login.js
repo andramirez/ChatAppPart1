@@ -6,6 +6,8 @@ export class Login extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.disableMe();
+        this.clicked = false
     }
     handleSubmit(event) {
         event.preventDefault();
@@ -33,13 +35,11 @@ export class Login extends React.Component {
             });
         }
     }
-    
     disableMe() {
-        var clicked = false;
         if (document.getElementById) {
-            if (!clicked) {
+            if (this.clicked == false) {
                 document.getElementById("connect").value = "thank you";
-                clicked = true;
+                this.clicked = true;
                 return true;
             }
         } 
