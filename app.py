@@ -154,7 +154,16 @@ def on_new_msg(data):
             models.db.session.commit()
             
             ##emits for user list
-            emit_user_bot(json['name'])
+            #user list -NEW
+            all_users.append({
+                'users': "cat.bot"
+            })
+            all_users.append({
+                'users': json['name']
+            })
+            socketio.emit('all users', {
+                'users': all_users
+            })
 
             
         else:
@@ -203,7 +212,16 @@ def on_new_msg(data):
             models.db.session.commit()
         
             ##emits for user list
-            emit_user_bot(json['name'])
+            #user list -NEW
+            all_users.append({
+                'users': "cat.bot"
+            })
+            all_users.append({
+                'users': json['name']
+            })
+            socketio.emit('all users', {
+                'users': all_users
+            })
             
             
         else:
