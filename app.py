@@ -98,31 +98,46 @@ def bot_msg(argument):
     else: #command wasn't recognied. Returns error message
         return " I don't recognize that command! Please type in '!!help' to receive a list of my commands. Meow"
         
+        
+def emit_user_bot(user):
+    #user list -NEW
+    all_users.append({
+        'users': "cat.bot"
+    })
+    all_users.append({
+        'users': user
+    })
+    socketio.emit('all users', {
+        'users': all_users
+    })
+    
+def bot_send(msg):
+    bot = bot_msg(msg)
+    all_msgs.append({
+    'name':" cat.bot",
+    'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
+    'msgs':bot
+    })
+    models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
+    models.db.session.commit()
+    
+    socketio.emit('all msgs', {
+        'msgs': all_msgs
+    }) 
+    #user list -NEW
+    all_users.append({
+    'users': "cat.bot"
+    })
+    socketio.emit('all users', {
+        'users': all_users
+    })
 
 ## appending all aspects of message
 @socketio.on('new msg')
 def on_new_msg(data):
     if "!! welcomeMessage" in data['msg']:
-            bot = bot_msg(data['msg'])
-            bot = bot
-            all_msgs.append({
-            'name':" cat.bot",
-            'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
-            'msgs':bot
-            })
-            models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
-            models.db.session.commit()
+            bot_send(data['msg'])
             
-            socketio.emit('all msgs', {
-                'msgs': all_msgs
-            }) 
-            #user list -NEW
-            all_users.append({
-            'users': "cat.bot"
-            })
-            socketio.emit('all users', {
-                'users': all_users
-            })
     elif 'facebook_user_token' in data:
         if "!! connected" in data['msg']:
             response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
@@ -137,19 +152,10 @@ def on_new_msg(data):
             models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
             models.db.session.commit()
             
-            socketio.emit('all msgs', {
-                'msgs': all_msgs
-            }) 
-            #user list -NEW
-            all_users.append({
-            'users': json['name']
-            })
-            socketio.emit('all users', {
-                'users': "cat.bot"
-            })
-            socketio.emit('all users', {
-                'users': all_users
-            })
+            ##emits for user list
+            emit_user_bot(json['name'])
+
+            
         else:
             response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
             json=response.json()
@@ -176,9 +182,11 @@ def on_new_msg(data):
                 models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
                 models.db.session.commit()
                 
-                socketio.emit('all msgs', {
-                    'msgs': all_msgs
-            }) 
+                
+        socketio.emit('all msgs', {
+            'msgs': all_msgs
+        }) 
+        
     else:
         if "!! connected" in data['msg']:
             response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
@@ -192,20 +200,11 @@ def on_new_msg(data):
             })
             models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
             models.db.session.commit()
+        
+            ##emits for user list
+            emit_user_bot(json['name'])
             
-            socketio.emit('all msgs', {
-                'msgs': all_msgs
-            }) 
-            # user list -NEW
-            all_users.append({
-            'users': "cat.bot"
-            })
-            all_users.append({
-            'users': json['name']
-            })
-            socketio.emit('all users', {
-                'users': all_users
-            })
+            
         else:
             response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
             json=response.json()
@@ -219,25 +218,11 @@ def on_new_msg(data):
             })
             
             if "!!" in data['msg']:
-                bot = bot_msg(data['msg'])
-                all_msgs.append({
-                'name':" cat.bot",
-                'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
-                'msgs':bot
-                })
-                models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
-                models.db.session.commit()
-                
-            all_users.append({
-                'users': "cat.bot"
-            })
-            socketio.emit('all users', {
-                    'users': all_users
-            })
+                bot_send(data['msg'])
             
-            socketio.emit('all msgs', {
-                    'msgs': all_msgs
-            }) 
+        socketio.emit('all msgs', {
+                'msgs': all_msgs
+        }) 
         
 if __name__ == '__main__': 
     socketio.run(

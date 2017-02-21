@@ -13193,16 +13193,7 @@ var Content = exports.Content = function (_React$Component) {
             null,
             'Please Sign In Using Google or Facebook'
           ),
-          React.createElement(_Login.Login, null),
-          React.createElement('div', {
-            className: 'fb-login-button',
-            'data-max-rows': '1',
-            'data-size': 'medium',
-            'data-show-faces': 'false',
-            'data-auto-logout-link': 'true' }),
-          React.createElement('div', {
-            className: 'g-signin2',
-            'data-theme': 'dark' })
+          React.createElement(_Login.Login, null)
         ),
         React.createElement(
           'div',
