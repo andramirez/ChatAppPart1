@@ -40,8 +40,6 @@ def on_disconnect():
 def bot_msg(argument):
     if "hello" in argument.lower(): #returns a greeting
         return " Hello, there! Meow"
-    elif "!! welcomeMessage" in argument():
-        return " Welcome to the Catroom. Please make sure to sign in"
     elif "riddle" in argument.lower(): #returns a riddle
         riddles = {
             1: "The more you take, the more you leave behind. What am I? Type '!!answer' for the answer",
@@ -123,7 +121,7 @@ def on_new_msg(data):
             socketio.emit('all users', {
                 'users': all_users
             })
-    if 'facebook_user_token' in data:
+    elif 'facebook_user_token' in data:
         if "!! connected" in data['msg']:
             response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
             json=response.json()
