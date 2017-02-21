@@ -11,7 +11,7 @@ export class Login extends React.Component {
     }
     handleSubmit(event) {
         event.preventDefault();
-        if(!this.disableMe())
+        if(this.disableMe())
         {
             this.clicked = true;
             FB.getLoginStatus((response) => {
