@@ -30,9 +30,9 @@ def index():
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected'
-    socketio.emit('all users', {
-        'users': all_users
-    })
+    # socketio.emit('all users', {
+    #     'users': all_users
+    # })
     # Socket.emit('new msg', {
     #     'msg': '!! welcomeMessage' 
     # });

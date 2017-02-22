@@ -13218,7 +13218,7 @@ var Content = exports.Content = function (_React$Component) {
             React.createElement(
               'div',
               { id: 'log' },
-              msgs
+              this.state.msgs
             ),
             React.createElement(
               'div',
