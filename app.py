@@ -98,28 +98,6 @@ def bot_msg(argument):
     else: #command wasn't recognied. Returns error message
         return " I don't recognize that command! Please type in '!!help' to receive a list of my commands. Meow"
         
-    
-def bot_send(msg):
-    bot = bot_msg(msg)
-    all_msgs.append({
-    'name':" cat.bot",
-    'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
-    'msgs':bot
-    })
-    models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
-    models.db.session.commit()
-    
-    socketio.emit('all msgs', {
-        'msgs': all_msgs
-    }) 
-    # #user list -NEW
-    if "cat.bot" not in all_users:
-        all_users.append({
-        'users': "cat.bot"
-        })
-        socketio.emit('all users', {
-            'users': all_users
-        })
 
 ## appending all aspects of message
 @socketio.on('new msg')
@@ -156,14 +134,14 @@ def on_new_msg(data):
                 })
 
             
-        elif "login" in data:
+        else:
             all_msgs.append({ ##retrieving facebook data
-                'name': data['name'],
-                'picture':data['picture'],
+                'name':" " + json['name'],
+                'picture':json['picture']['data']['url'],
                 'msgs':data['msg']
                 })
             ##add data to the database    
-            models.db.session.add(models.Message(data['picture'], data['name'], data['msg']))
+            models.db.session.add(models.Message(json['picture']['data']['url'], json['name'], data['msg']))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
@@ -230,7 +208,26 @@ def on_new_msg(data):
             })
             
             if "!!" in data['msg']:
-                bot_send(data['msg'])
+                bot = bot_msg(data['msg'])
+                all_msgs.append({
+                'name':" cat.bot",
+                'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
+                'msgs':bot
+                })
+                models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
+                models.db.session.commit()
+                
+                socketio.emit('all msgs', {
+                    'msgs': all_msgs
+                }) 
+                # #user list -NEW
+                if "cat.bot" not in all_users:
+                    all_users.append({
+                    'users': "cat.bot"
+                    })
+                    socketio.emit('all users', {
+                        'users': all_users
+                    })
         
 if __name__ == '__main__': 
     socketio.run(
