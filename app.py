@@ -139,7 +139,22 @@ def bot_send(msg):
 @socketio.on('new msg')
 def on_new_msg(data):
     if "!! welcomeMessage" in data['msg']:
-            bot_send(data['msg'])
+            bot = bot_msg(data['msg'])
+            all_msgs.append({
+            'name':" cat.bot",
+            'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
+            'msgs':bot
+            })
+            models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'cat.bot', bot))
+            models.db.session.commit()
+            
+            #user list -NEW
+            all_users.append({
+            'users': "cat.bot"
+            })
+            socketio.emit('all users', {
+                'users': all_users
+            })
             
     elif 'facebook_user_token' in data:
         if "!! connected" in data['msg'] or "!! disconnected" in data['msg']:

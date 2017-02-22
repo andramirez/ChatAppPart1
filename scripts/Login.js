@@ -7,7 +7,6 @@ export class Login extends React.Component {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.disableMe();
-        // this.loadPage();
         this.clicked = false
     }
     // loadPage(){
@@ -56,12 +55,12 @@ export class Login extends React.Component {
         Socket.emit('new msg', {
             'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
         });
-        FB.logout(function(response) {
-              Socket.emit('new msg', {
-                    'facebook_user_token': response.authResponse.accessToken,
-                    'msg': '!! disconnected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                });
-        });
+        // FB.logout(function(response) {
+        //       Socket.emit('new msg', {
+        //             'facebook_user_token': response.authResponse.accessToken,
+        //             'msg': '!! disconnected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+        //         });
+        // });
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
