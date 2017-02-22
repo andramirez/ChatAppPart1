@@ -11,9 +11,6 @@ export class Button extends React.Component {
                 Socket.emit('new msg',{
                     'facebook_user_token':
                     response.authResponse.accessToken,
-                    'msg': "!!connected"
-                });
-                Socket.emit('new msg',{
                     'msg': document.getElementById("msg").value
                 });
             }
@@ -22,13 +19,10 @@ export class Button extends React.Component {
         let user = auth.currentUser.get();
         if(user.isSignedIn()){
             Socket.emit('new msg',{
-                'google_user_token': user.getAuthResponse().id_token,
-                'msg': "!!connected",
-                'name': user['w3']['ig'],
-                'picture': user['w3']['Paa'],
-            });
-            Socket.emit('new msg',{
-                    'msg': document.getElementById("msg").value
+                    'google_user_token': user.getAuthResponse().id_token,
+                    'msg': document.getElementById("msg").value,
+                    'name': user['w3']['ig'],
+                    'picture': user['w3']['Paa'],
             });
             
         }

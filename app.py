@@ -96,6 +96,8 @@ def bot_msg(argument):
         !!time: I will tell you the current time"
     elif "welcomeMessage" in argument():
         return " Welcome to the Catroom. Please make sure to sign in"
+    elif "disconnected" in argument():
+        return " A user has disconnected! Name: "
     else: #command wasn't recognied. Returns error message
         return " I don't recognize that command! Please type in '!!help' to receive a list of my commands. Meow"
         
@@ -140,7 +142,7 @@ def on_new_msg(data):
             bot_send(data['msg'])
             
     elif 'facebook_user_token' in data:
-        if "!! connected" in data['msg']:
+        if "!! connected" in data['msg'] or "!! disconnected" in data['msg']:
             response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
             json=response.json()
             bot = bot_msg(data['msg'])
@@ -198,7 +200,7 @@ def on_new_msg(data):
         }) 
         
     else:
-        if "!! connected" in data['msg']:
+        if "!! connected" in data['msg'] or "!! disconnected" in data['msg']:
             response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
             json=response.json()
             bot = bot_msg(data['msg'])

@@ -25,7 +25,7 @@
   display: flex;
 }
 #log{
-  width:540px;
+  width:440px;
   padding-top: 1px;
   flex: 1;
   border-color: white;
