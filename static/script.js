@@ -13230,6 +13230,7 @@ var Content = exports.Content = function (_React$Component) {
                             React.createElement(
                                 'div',
                                 null,
+                                'Cats in Chat: ',
                                 count
                             ),
                             React.createElement(

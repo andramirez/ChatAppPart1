@@ -30,9 +30,9 @@ def index():
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected'
-    # Socket.emit('new msg', {
-    #     'msg': '!! welcomeMessage' 
-    # });
+    Socket.emit('new msg', {
+        'msg': '!! welcomeMessage' 
+    });
     # if "cat.bot" not in all_users['users']:
     #     all_users.append({
     #     'users': "cat.bot"
@@ -209,11 +209,6 @@ def on_new_msg(data):
                 })
                 models.db.session.add(models.Message(u'https://f4.bcbits.com/img/a2219945996_16.jpg', 'bot.bot', bot))
                 models.db.session.commit()
-                
-                
-        socketio.emit('all msgs', {
-            'msgs': all_msgs
-        }) 
         
     else:
         if "!! connected" in data['msg'] or "!! disconnected" in data['msg']:
@@ -259,9 +254,9 @@ def on_new_msg(data):
             if "!!" in data['msg']:
                 bot_send(data['msg'])
             
-        socketio.emit('all msgs', {
-                'msgs': all_msgs
-        }) 
+    socketio.emit('all msgs', {
+            'msgs': all_msgs
+    }) 
         
 if __name__ == '__main__': 
     socketio.run(

@@ -76,7 +76,7 @@ export class Content extends React.Component {
           <Login/>
           <div id="chatbox" style = {chat}>
             <div id="log">{msgs}</div> 
-            <div id="userList"><div>{count}</div><ul>{users}</ul></div>
+            <div id="userList"><div>Cats in Chat: {count}</div><ul>{users}</ul></div>
           </div>
         <Button/>
         </div>
