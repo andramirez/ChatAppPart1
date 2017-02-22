@@ -47,7 +47,7 @@ export class Content extends React.Component {
     );
     //NEW
     let users = this.state.users.map(
-            (n, index) => <li key = {index}  id="text2">{n.users}</li>
+            (n, index) => <li key = {index} id="text2">{n.users}</li>
     );
     
     
