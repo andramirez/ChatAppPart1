@@ -13361,6 +13361,8 @@ var Button = exports.Button = function (_React$Component) {
     _createClass(Button, [{
         key: 'handleSubmit',
         value: function handleSubmit(event) {
+            var _this2 = this;
+
             event.preventDefault();
             FB.getLoginStatus(function (response) {
                 if (response.status == 'connected') {
@@ -13368,17 +13370,20 @@ var Button = exports.Button = function (_React$Component) {
                         'facebook_user_token': response.authResponse.accessToken,
                         'msg': document.getElementById("msg").value
                     });
+                } else {
+                    _this2.state.trigger = true;
                 }
             });
-            var auth = gapi.auth2.getAuthInstance();
-            var user = auth.currentUser.get();
-            if (user.isSignedIn()) {
-                _Socket.Socket.emit('new msg', {
-                    'google_user_token': user.getAuthResponse().id_token,
-                    'msg': document.getElementById("msg").value,
-                    'name': user['w3']['ig'],
-                    'picture': user['w3']['Paa']
-                });
+            if (this.state.trigger == true) {
+                var auth = gapi.auth2.getAuthInstance();
+                var user = auth.currentUser.get();
+                if (user.isSignedIn()) {
+                    _Socket.Socket.emit('new message', {
+                        'login': 'Google',
+                        'name': user['w3']['ig'],
+                        'picture': user['w3']['Paa']
+                    });
+                }
             }
 
             document.getElementById("msg").value = "";
@@ -13386,6 +13391,7 @@ var Button = exports.Button = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+
             return React.createElement(
                 'form',
                 { onSubmit: this.handleSubmit },
@@ -13441,6 +13447,7 @@ var Login = exports.Login = function (_React$Component) {
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.disableMe();
         _this.clicked = false;
+        _this.state.trigger = false;
         return _this;
     }
     // loadPage(){
@@ -13452,6 +13459,8 @@ var Login = exports.Login = function (_React$Component) {
     _createClass(Login, [{
         key: 'handleSubmit',
         value: function handleSubmit(event) {
+            var _this2 = this;
+
             event.preventDefault();
             if (this.disableMe()) {
                 this.clicked = true;
@@ -13461,18 +13470,20 @@ var Login = exports.Login = function (_React$Component) {
                             'facebook_user_token': response.authResponse.accessToken,
                             'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                         });
+                    } else {
+                        _this2.state.trigger = true;
                     }
                 });
-
-                var auth = gapi.auth2.getAuthInstance();
-                var user = auth.currentUser.get();
-                if (user.isSignedIn()) {
-                    _Socket.Socket.emit('new msg', {
-                        'google_user_token': user.getAuthResponse().id_token,
-                        'msg': '!! connected', //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                        'name': user['w3']['ig'],
-                        'picture': user['w3']['Paa']
-                    });
+                if (this.state.trigger == true) {
+                    var auth = gapi.auth2.getAuthInstance();
+                    var user = auth.currentUser.get();
+                    if (user.isSignedIn()) {
+                        _Socket.Socket.emit('new message', {
+                            'login': 'Google',
+                            'name': user['w3']['ig'],
+                            'picture': user['w3']['Paa']
+                        });
+                    }
                 }
             }
         }

@@ -8,6 +8,7 @@ export class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.disableMe();
         this.clicked = false
+        this.state.trigger = false;
     }
     // loadPage(){
     //         Socket.emit('new msg', {
@@ -27,19 +28,24 @@ export class Login extends React.Component {
                         'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                     });
                 }
+                else{
+                    this.state.trigger = true;
+                }
                 
             });
-        
-        let auth = gapi.auth2.getAuthInstance();
-        let user = auth.currentUser.get();
-        if(user.isSignedIn()){
-            Socket.emit('new msg',{
-                'google_user_token': user.getAuthResponse().id_token,
-                'msg': '!! connected', //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-                'name': user['w3']['ig'],
-                'picture': user['w3']['Paa'],
-                });
+            if(this.state.trigger == true)
+            {
+                let auth = gapi.auth2.getAuthInstance();
+                let user = auth.currentUser.get();
+                if (user.isSignedIn()){
+                    Socket.emit('new message', {
+                        'login': 'Google', 
+                        'name': user['w3']['ig'],
+                        'picture': user['w3']['Paa'],
+                    });
+                }
             }
+
         }
     }
     disableMe() {

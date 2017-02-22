@@ -101,18 +101,6 @@ def bot_msg(argument):
     else: #command wasn't recognied. Returns error message
         return " I don't recognize that command! Please type in '!!help' to receive a list of my commands. Meow"
         
-        
-def emit_user_bot(user):
-    #user list -NEW
-    all_users.append({
-        'users': "cat.bot"
-    })
-    all_users.append({
-        'users': user
-    })
-    socketio.emit('all users', {
-        'users': all_users
-    })
     
 def bot_send(msg):
     bot = bot_msg(msg)
@@ -149,12 +137,13 @@ def on_new_msg(data):
             models.db.session.commit()
             
             #user list -NEW
-            all_users.append({
-            'users': "cat.bot"
-            })
-            socketio.emit('all users', {
-                'users': all_users
-            })
+            if "cat.bot" not in all_users:
+                all_users.append({
+                'users': "cat.bot"
+                })
+                socketio.emit('all users', {
+                    'users': all_users
+                })
             
     elif 'facebook_user_token' in data:
         if "!! connected" in data['msg'] or "!! disconnected" in data['msg']:
@@ -172,15 +161,17 @@ def on_new_msg(data):
             
             ##emits for user list
             #user list -NEW
-            all_users.append({
-                'users': "cat.bot"
-            })
-            all_users.append({
-                'users': json['name']
-            })
-            socketio.emit('all users', {
-                'users': all_users
-            })
+            if "cat.bot" not in all_users:
+                 all_users.append({
+                    'users': "cat.bot"
+                })
+            if json['name'] not in all_users:
+                all_users.append({
+                    'users': json['name']
+                })
+                socketio.emit('all users', {
+                    'users': all_users
+                })
 
             
         else:
@@ -230,15 +221,17 @@ def on_new_msg(data):
         
             ##emits for user list
             #user list -NEW
-            all_users.append({
-                'users': "cat.bot"
-            })
-            all_users.append({
-                'users': json['name']
-            })
-            socketio.emit('all users', {
-                'users': all_users
-            })
+            if "cat.bot" not in all_users:
+                 all_users.append({
+                    'users': "cat.bot"
+                })
+            if json['name'] not in all_users:
+                all_users.append({
+                    'users': json['name']
+                })
+                socketio.emit('all users', {
+                    'users': all_users
+                })
             
             
         else:
