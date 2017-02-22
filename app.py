@@ -115,13 +115,13 @@ def bot_send(msg):
     socketio.emit('all msgs', {
         'msgs': all_msgs
     }) 
-    #user list -NEW
-    all_users.append({
-    'users': "cat.bot"
-    })
-    socketio.emit('all users', {
-        'users': all_users
-    })
+    # #user list -NEW
+    # all_users.append({
+    # 'users': "cat.bot"
+    # })
+    # socketio.emit('all users', {
+    #     'users': all_users
+    # })
 
 ## appending all aspects of message
 @socketio.on('new msg')
@@ -137,13 +137,13 @@ def on_new_msg(data):
             models.db.session.commit()
             
             #user list -NEW
-            if "cat.bot" not in all_users:
-                all_users.append({
-                'users': "cat.bot"
-                })
-                socketio.emit('all users', {
-                    'users': all_users
-                })
+            # if "cat.bot" not in all_users:
+            #     all_users.append({
+            #     'users': "cat.bot"
+            #     })
+            #     socketio.emit('all users', {
+            #         'users': all_users
+            #     })
             
     elif 'facebook_user_token' in data:
         if "!! connected" in data['msg'] or "!! disconnected" in data['msg']:
@@ -161,17 +161,17 @@ def on_new_msg(data):
             
             ##emits for user list
             #user list -NEW
-            if "cat.bot" not in all_users:
-                 all_users.append({
-                    'users': "cat.bot"
-                })
-            if json['name'] not in all_users:
-                all_users.append({
-                    'users': json['name']
-                })
-                socketio.emit('all users', {
-                    'users': all_users
-                })
+            # if "cat.bot" not in all_users:
+            #      all_users.append({
+            #         'users': "cat.bot"
+            #     })
+            # if json['name'] not in all_users:
+            #     all_users.append({
+            #         'users': json['name']
+            #     })
+            #     socketio.emit('all users', {
+            #         'users': all_users
+            #     })
 
             
         else:
@@ -221,17 +221,17 @@ def on_new_msg(data):
         
             ##emits for user list
             #user list -NEW
-            if "cat.bot" not in all_users:
-                 all_users.append({
-                    'users': "cat.bot"
-                })
-            if json['name'] not in all_users:
-                all_users.append({
-                    'users': json['name']
-                })
-                socketio.emit('all users', {
-                    'users': all_users
-                })
+            # if "cat.bot" not in all_users:
+            #      all_users.append({
+            #         'users': "cat.bot"
+            #     })
+            # if json['name'] not in all_users:
+            #     all_users.append({
+            #         'users': json['name']
+            #     })
+            #     socketio.emit('all users', {
+            #         'users': all_users
+            #     })
             
             
         else:
