@@ -13358,7 +13358,7 @@ var Button = exports.Button = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Button.__proto__ || Object.getPrototypeOf(Button)).call(this, props));
 
         _this.handleSubmit = _this.handleSubmit.bind(_this);
-        _this.state.trigger = false;
+        _this.trigger = false;
         return _this;
     }
 
@@ -13375,10 +13375,10 @@ var Button = exports.Button = function (_React$Component) {
                         'msg': document.getElementById("msg").value
                     });
                 } else {
-                    _this2.state.trigger = true;
+                    _this2.trigger = true;
                 }
             });
-            if (this.state.trigger == true) {
+            if (this.trigger == true) {
                 var auth = gapi.auth2.getAuthInstance();
                 var user = auth.currentUser.get();
                 if (user.isSignedIn()) {
@@ -13451,7 +13451,7 @@ var Login = exports.Login = function (_React$Component) {
         _this.handleSubmit = _this.handleSubmit.bind(_this);
         _this.disableMe();
         _this.clicked = false;
-        _this.state.trigger = false;
+        _this.trigger = false;
         return _this;
     }
     // loadPage(){
@@ -13475,10 +13475,10 @@ var Login = exports.Login = function (_React$Component) {
                             'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
                         });
                     } else {
-                        _this2.state.trigger = true;
+                        _this2.trigger = true;
                     }
                 });
-                if (this.state.trigger == true) {
+                if (this.trigger == true) {
                     var auth = gapi.auth2.getAuthInstance();
                     var user = auth.currentUser.get();
                     if (user.isSignedIn()) {
