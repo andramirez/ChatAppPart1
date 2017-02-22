@@ -25,9 +25,8 @@
   display: flex;
 }
 #log{
-  width:440px;
+  width:400px;
   padding-top: 1px;
-  flex: 1;
   overflow: auto;
 }
 #welcome{

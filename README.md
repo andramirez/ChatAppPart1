@@ -12,10 +12,12 @@ of my project such as the background. Also, instead of a regular bot, I decided 
 
 Of my various issues with my Chat App, I acknowledge that my app doesn't do the following:
     -Load message list with load of page or connection of user (only loads with make connection button)
-    -
+    -The user list and count do not properly update on connect and disconnect
+    -The Google sign-in button only works on Chrome
+    -My chat bot doesn't acknowledge when users leave
 
 #Improvement:
 
-I feel that I could improve my Web App by including a better search query for both the images and the quotes to be more specific to what I want 
-them to display. Also, I feel as though I can create a more cohesive theme like authors of a certain genre or authors of a specific time period 
-by giving more parameters for filtering the results.
+I feel that I could make great improvements given more time. I feel like I was rushed towards the end of this project and I think that with a more spaced out workload, 
+I could make much needed improvements for this project including implementing the solutions to the issues I listed above. I also would like to improve on implementing 
+the theme more throughout the Chat App itself. 
