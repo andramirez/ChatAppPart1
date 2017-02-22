@@ -5,14 +5,14 @@
 
 #Theme:
 
-The theme of my Web App is Writers' quotes. As the twitter api generates quotes from five authors: JK Rowling, Dr. Seuss, William Shakespear, 
-Aldous Huxley, and Stephen King, Getty images produces images that are related to each indivdual author whether it be pictures of the authors 
-themseleves, or pictures related to their writing.
+The theme of my Chat Room App is cats. I feel that it is a fun and verstile theme that I can implement throughout the app. I was able to do so by tweeking small aspects 
+of my project such as the background. Also, instead of a regular bot, I decided to have a 'cat bot' that will occasionally meow at the end of it's responses.
 
 #Acknowledgement of Problems:
 
-Some problems that I have come to realize about my Web app is the strength of the relations of the images to the quotes themselves. With the query of 
-the getty images app only being the name of the author, I have come to realize that getty images will not always produce a prevelant image to fit the quote I have requested. Another issue I have found is that since I am taking tweets from specific users, some of the tweets won't always be quotes from the authors themseleves. Some of the tweets will only include the name of the author but won't contain an actual quote from the author.
+Of my various issues with my Chat App, I acknowledge that my app doesn't do the following:
+    -Load message list with load of page or connection of user (only loads with make connection button)
+    -
 
 #Improvement:
 
