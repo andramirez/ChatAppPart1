@@ -29,7 +29,10 @@ def index():
 ##socket connection/ datbase
 @socketio.on('connect')
 def on_connect():
-    print 'Someone connected!'
+    print 'Someone connected'
+    Socket.emit('new msg', {
+        'msg': '!! welcomeMessage' 
+    });
 
 #socket disconnect
 @socketio.on('disconnect')

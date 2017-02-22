@@ -47,7 +47,7 @@ export class Login extends React.Component {
                     });
                 }
             }
-
+            this.trigger = false;
         }
     }
     disableMe() {

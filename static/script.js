@@ -13492,6 +13492,7 @@ var Login = exports.Login = function (_React$Component) {
                         });
                     }
                 }
+                this.trigger = false;
             }
         }
     }, {
