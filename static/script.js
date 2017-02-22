@@ -13145,7 +13145,7 @@ var Content = exports.Content = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            var count = users.length;
+            var count = this.state.users.length;
             _Socket.Socket.emit('new msg', {
                 'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
             });
@@ -13227,6 +13227,11 @@ var Content = exports.Content = function (_React$Component) {
                         React.createElement(
                             'div',
                             { id: 'userList' },
+                            React.createElement(
+                                'div',
+                                null,
+                                count
+                            ),
                             React.createElement(
                                 'ul',
                                 null,
