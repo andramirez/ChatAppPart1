@@ -13145,16 +13145,20 @@ var Content = exports.Content = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
+            var count = this.state.users.length;
+            _Socket.Socket.emit('new msg', {
+                'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+            });
 
-            // const style = {
-            //   border:'.5px solid black', 
-            //   textAlign:'left',
-            //   padding:'2px',
-            //   width: '840px',
-            //   whitespace: 'nowrap',
-            //   overflow: 'hidden',
-            //   textoverflow: 'ellipsis'
-            // };
+            var style = {
+                border: '.5px solid black',
+                textAlign: 'left',
+                padding: '2px',
+                width: '840px',
+                whitespace: 'nowrap',
+                overflow: 'hidden',
+                textoverflow: 'ellipsis'
+            };
             var chat = {
                 background: 'rgba(190, 190, 190, .75)'
             };
@@ -13162,7 +13166,7 @@ var Content = exports.Content = function (_React$Component) {
             var msgs = this.state.msgs.map(function (n, index) {
                 return React.createElement(
                     'div',
-                    { key: index, id: 'text1' },
+                    { key: index, style: style, id: 'text1' },
                     React.createElement('img', { src: n.picture }),
                     React.createElement(
                         'b',
@@ -13227,7 +13231,7 @@ var Content = exports.Content = function (_React$Component) {
                                 'div',
                                 null,
                                 'Cats in Chat: ',
-                                this.state.users.length
+                                count
                             ),
                             React.createElement(
                                 'ul',

@@ -8,7 +8,7 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'msgs': [],
-            'users':[],
+            'users':[]
         };
     }
     
@@ -28,26 +28,30 @@ export class Content extends React.Component {
   }
     
   render() {
+    var count = this.state.users.length;
+    Socket.emit('new msg', {
+            'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+        });
     
-    // const style = {
-    //   border:'.5px solid black', 
-    //   textAlign:'left',
-    //   padding:'2px',
-    //   width: '840px',
-    //   whitespace: 'nowrap',
-    //   overflow: 'hidden',
-    //   textoverflow: 'ellipsis'
-    // };
+    const style = {
+      border:'.5px solid black', 
+      textAlign:'left',
+      padding:'2px',
+      width: '840px',
+      whitespace: 'nowrap',
+      overflow: 'hidden',
+      textoverflow: 'ellipsis'
+    };
     const chat = {
       background: 'rgba(190, 190, 190, .75)'
     };
      //goes inside log div
     let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
+            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
     //NEW
     let users = this.state.users.map(
-            (n, index) => <li key = {index} id="text2">{n.users}</li>
+            (n, index) => <li key = {index}  id="text2">{n.users}</li>
     );
     
     
@@ -72,7 +76,7 @@ export class Content extends React.Component {
           <Login/>
           <div id="chatbox" style = {chat}>
             <div id="log">{msgs}</div> 
-            <div id="userList"><div>Cats in Chat: {this.state.users.length}</div><ul>{users}</ul></div>
+            <div id="userList"><div>Cats in Chat: {count}</div><ul>{users}</ul></div>
           </div>
         <Button/>
         </div>
