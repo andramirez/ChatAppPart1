@@ -42,6 +42,13 @@ img{
 #text1{ 
   font-size: 20px;
   text-Align:left;
+  border:.5px solid black; 
+  text-Align:left;
+  padding:2px;
+  width:840px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }
 #userList{
   border:solid;

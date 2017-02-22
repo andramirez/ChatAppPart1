@@ -8,7 +8,9 @@ export class Content extends React.Component {
         super(props);
         this.state = {
             'msgs': [],
-            'users':[]
+            'users':[],
+            'styles':{},
+            'msg' :[]
         };
     }
     
@@ -26,6 +28,10 @@ export class Content extends React.Component {
           });
       })
   }
+  
+    msgs = this.state.msgs.map(
+            (n, index) => <div key = {index}  id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
+    );
     
   render() {
     
@@ -71,7 +77,7 @@ export class Content extends React.Component {
           <div id="welcome">Welcome to the Cat Room</div>
           <Login/>
           <div id="chatbox" style = {chat}>
-            <div id="log">{this.state.msgs[1]}</div> 
+            <div id="log">{msgs}</div> 
             <div id="userList"><div>Cats in Chat: {this.state.users.length}</div><ul>{users}</ul></div>
           </div>
         <Button/>
