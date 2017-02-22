@@ -135,6 +135,8 @@ def on_new_msg(data):
 
             
         else:
+            response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
+            json=response.json()
             all_msgs.append({ ##retrieving facebook data
                 'name':" " + json['name'],
                 'picture':json['picture']['data']['url'],
