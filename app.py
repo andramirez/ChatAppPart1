@@ -33,12 +33,14 @@ def on_connect():
     # Socket.emit('new msg', {
     #     'msg': '!! welcomeMessage' 
     # });
-    all_users.append({
-    'users': "cat.bot"
-    })
-    socketio.emit('all users', {
-        'users': all_users
-    })
+    if "cat.bot" not in all_users:
+        all_users.append({
+        'users': "cat.bot"
+        })
+        socketio.emit('all users', {
+            'users': all_users
+        })
+
 
 #socket disconnect
 @socketio.on('disconnect')
