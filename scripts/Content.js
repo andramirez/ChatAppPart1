@@ -9,8 +9,6 @@ export class Content extends React.Component {
         this.state = {
             'msgs': [],
             'users':[],
-            'styles':{},
-            'msg' :[]
         };
     }
     
@@ -31,21 +29,21 @@ export class Content extends React.Component {
     
   render() {
     
-    const style = {
-      border:'.5px solid black', 
-      textAlign:'left',
-      padding:'2px',
-      width: '840px',
-      whitespace: 'nowrap',
-      overflow: 'hidden',
-      textoverflow: 'ellipsis'
-    };
+    // const style = {
+    //   border:'.5px solid black', 
+    //   textAlign:'left',
+    //   padding:'2px',
+    //   width: '840px',
+    //   whitespace: 'nowrap',
+    //   overflow: 'hidden',
+    //   textoverflow: 'ellipsis'
+    // };
     const chat = {
       background: 'rgba(190, 190, 190, .75)'
     };
      //goes inside log div
     let msgs = this.state.msgs.map(
-            (n, index) => <div key = {index} style={style} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
+            (n, index) => <div key = {index} id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
     );
     //NEW
     let users = this.state.users.map(
