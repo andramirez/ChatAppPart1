@@ -3,6 +3,11 @@ import * as React from 'react';
 import { Socket } from './Socket';
 
 export class Button extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state.trigger = false;
+    }
     
     handleSubmit(event) {
         event.preventDefault();
