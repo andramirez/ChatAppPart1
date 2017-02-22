@@ -30,9 +30,6 @@ export class Button extends React.Component {
         document.getElementById("msg").value = "";
     }
     render() {
-        Socket.emit('new msg', {
-            'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-        });
         return (
             <form onSubmit={this.handleSubmit}>
                 <textarea id="msg" rows="4" cols="50" placeholder="Please insert text"></textarea> 

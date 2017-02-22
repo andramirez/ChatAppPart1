@@ -13145,6 +13145,9 @@ var Content = exports.Content = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      _Socket.Socket.emit('new msg', {
+        'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+      });
 
       var style = {
         border: '.5px solid black',
@@ -13383,9 +13386,6 @@ var Button = exports.Button = function (_React$Component) {
     }, {
         key: 'render',
         value: function render() {
-            _Socket.Socket.emit('new msg', {
-                'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-            });
             return React.createElement(
                 'form',
                 { onSubmit: this.handleSubmit },
