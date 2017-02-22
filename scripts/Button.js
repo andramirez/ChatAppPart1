@@ -37,6 +37,7 @@ export class Button extends React.Component {
                 });
             }
         }
+        this.trigger = false;
         
         document.getElementById("msg").value = "";
     }

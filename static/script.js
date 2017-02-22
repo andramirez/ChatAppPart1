@@ -13390,6 +13390,7 @@ var Button = exports.Button = function (_React$Component) {
                     });
                 }
             }
+            this.trigger = false;
 
             document.getElementById("msg").value = "";
         }
