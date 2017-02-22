@@ -13228,11 +13228,6 @@ var Content = exports.Content = function (_React$Component) {
                             'div',
                             { id: 'userList' },
                             React.createElement(
-                                'div',
-                                null,
-                                count
-                            ),
-                            React.createElement(
                                 'ul',
                                 null,
                                 users
