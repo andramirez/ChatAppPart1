@@ -8,7 +8,7 @@ export class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.disableMe();
         this.clicked = false
-        this.state.trigger = false;
+        this.trigger = false;
     }
     // loadPage(){
     //         Socket.emit('new msg', {
@@ -29,11 +29,11 @@ export class Login extends React.Component {
                     });
                 }
                 else{
-                    this.state.trigger = true;
+                    this.trigger = true;
                 }
                 
             });
-            if(this.state.trigger == true)
+            if(this.trigger == true)
             {
                 let auth = gapi.auth2.getAuthInstance();
                 let user = auth.currentUser.get();

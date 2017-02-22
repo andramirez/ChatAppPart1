@@ -6,7 +6,7 @@ export class Button extends React.Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state.trigger = false;
+        this.trigger = false;
     }
     
     handleSubmit(event) {
@@ -20,11 +20,11 @@ export class Button extends React.Component {
                 });
             }
             else{
-                    this.state.trigger = true;
+                    this.trigger = true;
             }
             
         });
-        if(this.state.trigger == true)
+        if(this.trigger == true)
         {
             let auth = gapi.auth2.getAuthInstance();
             let user = auth.currentUser.get();
