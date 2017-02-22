@@ -13081,7 +13081,7 @@ module.exports = yeast;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 exports.Content = undefined;
 
@@ -13108,145 +13108,141 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Content = exports.Content = function (_React$Component) {
-    _inherits(Content, _React$Component);
+  _inherits(Content, _React$Component);
 
-    function Content(props) {
-        _classCallCheck(this, Content);
+  function Content(props) {
+    _classCallCheck(this, Content);
 
-        var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Content.__proto__ || Object.getPrototypeOf(Content)).call(this, props));
 
-        _this.state = {
-            'msgs': [],
-            'users': []
-        };
-        return _this;
+    _this.state = {
+      'msgs': [],
+      'users': []
+    };
+    return _this;
+  }
+
+  //msgs socket
+
+
+  _createClass(Content, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _Socket.Socket.on('all msgs', function (data) {
+        _this2.setState({
+          'msgs': data['msgs']
+        });
+      });
+      //NEW
+      _Socket.Socket.on('all users', function (data) {
+        _this2.setState({
+          'users': data['users']
+        });
+      });
     }
+  }, {
+    key: 'render',
+    value: function render() {
 
-    //msgs socket
+      var style = {
+        border: '.5px solid black',
+        textAlign: 'left',
+        padding: '2px',
+        width: '840px',
+        whitespace: 'nowrap',
+        overflow: 'hidden',
+        textoverflow: 'ellipsis'
+      };
+      var chat = {
+        background: 'rgba(190, 190, 190, .75)'
+      };
+      //goes inside log div
+      var msgs = this.state.msgs.map(function (n, index) {
+        return React.createElement(
+          'div',
+          { key: index, style: style, id: 'text1' },
+          React.createElement('img', { src: n.picture }),
+          React.createElement(
+            'b',
+            null,
+            n.name,
+            ':'
+          ),
+          n.msgs
+        );
+      });
+      //NEW
+      var users = this.state.users.map(function (n, index) {
+        return React.createElement(
+          'li',
+          { key: index, id: 'text2' },
+          n.users
+        );
+      });
 
-
-    _createClass(Content, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            var _this2 = this;
-
-            _Socket.Socket.on('all msgs', function (data) {
-                _this2.setState({
-                    'msgs': data['msgs']
-                });
-            });
-            //NEW
-            _Socket.Socket.on('all users', function (data) {
-                _this2.setState({
-                    'users': data['users']
-                });
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var count = this.state.users.length;
-            _Socket.Socket.emit('new msg', {
-                'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-            });
-
-            var style = {
-                border: '.5px solid black',
-                textAlign: 'left',
-                padding: '2px',
-                width: '840px',
-                whitespace: 'nowrap',
-                overflow: 'hidden',
-                textoverflow: 'ellipsis'
-            };
-            var chat = {
-                background: 'rgba(190, 190, 190, .75)'
-            };
-            //goes inside log div
-            var msgs = this.state.msgs.map(function (n, index) {
-                return React.createElement(
-                    'div',
-                    { key: index, style: style, id: 'text1' },
-                    React.createElement('img', { src: n.picture }),
-                    React.createElement(
-                        'b',
-                        null,
-                        n.name,
-                        ':'
-                    ),
-                    n.msgs
-                );
-            });
-            //NEW
-            var users = this.state.users.map(function (n, index) {
-                return React.createElement(
-                    'li',
-                    { key: index, id: 'text2' },
-                    n.users
-                );
-            });
-
-            return React.createElement(
+      return React.createElement(
+        'div',
+        { className: 'App' },
+        React.createElement(
+          'div',
+          _defineProperty({ id: 'live' }, 'id', 'small-container'),
+          React.createElement(
+            'h3',
+            null,
+            'Please Sign In Using Google or Facebook'
+          ),
+          React.createElement('div', {
+            className: 'fb-login-button',
+            'data-max-rows': '1',
+            'data-size': 'medium',
+            'data-show-faces': 'false',
+            'data-auto-logout-link': 'true' }),
+          React.createElement('div', {
+            className: 'g-signin2',
+            'data-theme': 'dark' })
+        ),
+        React.createElement(
+          'div',
+          { id: 'msgBox' },
+          React.createElement(
+            'div',
+            { id: 'welcome' },
+            'Welcome to the Cat Room'
+          ),
+          React.createElement(_Login.Login, null),
+          React.createElement(
+            'div',
+            { id: 'chatbox', style: chat },
+            React.createElement(
+              'div',
+              { id: 'log' },
+              msgs
+            ),
+            React.createElement(
+              'div',
+              { id: 'userList' },
+              React.createElement(
                 'div',
-                { className: 'App' },
-                React.createElement(
-                    'div',
-                    _defineProperty({ id: 'live' }, 'id', 'small-container'),
-                    React.createElement(
-                        'h3',
-                        null,
-                        'Please Sign In Using Google or Facebook'
-                    ),
-                    React.createElement('div', {
-                        className: 'fb-login-button',
-                        'data-max-rows': '1',
-                        'data-size': 'medium',
-                        'data-show-faces': 'false',
-                        'data-auto-logout-link': 'true' }),
-                    React.createElement('div', {
-                        className: 'g-signin2',
-                        'data-theme': 'dark' })
-                ),
-                React.createElement(
-                    'div',
-                    { id: 'msgBox' },
-                    React.createElement(
-                        'div',
-                        { id: 'welcome' },
-                        'Welcome to the Cat Room'
-                    ),
-                    React.createElement(_Login.Login, null),
-                    React.createElement(
-                        'div',
-                        { id: 'chatbox', style: chat },
-                        React.createElement(
-                            'div',
-                            { id: 'log' },
-                            msgs
-                        ),
-                        React.createElement(
-                            'div',
-                            { id: 'userList' },
-                            React.createElement(
-                                'div',
-                                null,
-                                'Cats in Chat: ',
-                                count
-                            ),
-                            React.createElement(
-                                'ul',
-                                null,
-                                users
-                            )
-                        )
-                    ),
-                    React.createElement(_Button.Button, null)
-                )
-            );
-        }
-    }]);
+                null,
+                'Cats in Chat: ',
+                this.state.users.length
+              ),
+              React.createElement(
+                'ul',
+                null,
+                users
+              )
+            )
+          ),
+          React.createElement(_Button.Button, null)
+        )
+      );
+    }
+  }]);
 
-    return Content;
+  return Content;
 }(React.Component);
 
 /***/ }),

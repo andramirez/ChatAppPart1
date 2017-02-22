@@ -28,10 +28,6 @@ export class Content extends React.Component {
   }
     
   render() {
-    var count = this.state.users.length;
-    Socket.emit('new msg', {
-            'msg': '!! welcomeMessage' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
-        });
     
     const style = {
       border:'.5px solid black', 
@@ -76,7 +72,7 @@ export class Content extends React.Component {
           <Login/>
           <div id="chatbox" style = {chat}>
             <div id="log">{msgs}</div> 
-            <div id="userList"><div>Cats in Chat: {count}</div><ul>{users}</ul></div>
+            <div id="userList"><div>Cats in Chat: {this.state.users.length}</div><ul>{users}</ul></div>
           </div>
         <Button/>
         </div>
