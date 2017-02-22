@@ -33,6 +33,12 @@ def on_connect():
     # Socket.emit('new msg', {
     #     'msg': '!! welcomeMessage' 
     # });
+    all_users.append({
+    'users': "cat.bot"
+    })
+    socketio.emit('all users', {
+        'users': all_users
+    })
 
 #socket disconnect
 @socketio.on('disconnect')
@@ -119,12 +125,13 @@ def bot_send(msg):
         'msgs': all_msgs
     }) 
     # #user list -NEW
-    all_users.append({
-    'users': "cat.bot"
-    })
-    socketio.emit('all users', {
-        'users': all_users
-    })
+    if "cat.bot" not in all_users:
+        all_users.append({
+        'users': "cat.bot"
+        })
+        socketio.emit('all users', {
+            'users': all_users
+        })
 
 ## appending all aspects of message
 @socketio.on('new msg')
