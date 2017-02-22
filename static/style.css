@@ -48,6 +48,8 @@ img{
 #userList{
   border:solid;
   width: 200px;
+  text-Align:left;
+  list-style-type: none;
 }
 body{
   background: url("https://images3.alphacoders.com/235/thumb-350-235575.jpg") no-repeat center center fixed; 
