@@ -13382,10 +13382,11 @@ var Button = exports.Button = function (_React$Component) {
                 var auth = gapi.auth2.getAuthInstance();
                 var user = auth.currentUser.get();
                 if (user.isSignedIn()) {
-                    _Socket.Socket.emit('new message', {
+                    _Socket.Socket.emit('new msg', {
                         'login': 'Google',
                         'name': user['w3']['ig'],
-                        'picture': user['w3']['Paa']
+                        'picture': user['w3']['Paa'],
+                        'msg': document.getElementById("msg").value
                     });
                 }
             }
@@ -13482,10 +13483,12 @@ var Login = exports.Login = function (_React$Component) {
                     var auth = gapi.auth2.getAuthInstance();
                     var user = auth.currentUser.get();
                     if (user.isSignedIn()) {
-                        _Socket.Socket.emit('new message', {
+                        _Socket.Socket.emit('new msg', {
                             'login': 'Google',
                             'name': user['w3']['ig'],
-                            'picture': user['w3']['Paa']
+                            'picture': user['w3']['Paa'],
+                            'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+
                         });
                     }
                 }

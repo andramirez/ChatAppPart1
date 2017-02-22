@@ -38,10 +38,12 @@ export class Login extends React.Component {
                 let auth = gapi.auth2.getAuthInstance();
                 let user = auth.currentUser.get();
                 if (user.isSignedIn()){
-                    Socket.emit('new message', {
+                    Socket.emit('new msg', {
                         'login': 'Google', 
                         'name': user['w3']['ig'],
                         'picture': user['w3']['Paa'],
+                        'msg': '!! connected' //My bot sees this and goes oh! and does botmsg = json['name'] + ' has entered the chatroom.'
+
                     });
                 }
             }

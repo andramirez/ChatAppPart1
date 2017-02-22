@@ -174,16 +174,14 @@ def on_new_msg(data):
                 })
 
             
-        else:
-            response = requests.get('https://graph.facebook.com/v2.8/me?fields=id%2Cname%2Cpicture&access_token='+ data['facebook_user_token'])
-            json=response.json()
+        elif "login" in data:
             all_msgs.append({ ##retrieving facebook data
-                'name':" " + json['name'],
-                'picture':json['picture']['data']['url'],
+                'name': data['name'],
+                'picture':data['picture'],
                 'msgs':data['msg']
                 })
             ##add data to the database    
-            models.db.session.add(models.Message(json['picture']['data']['url'], json['name'], data['msg']))
+            models.db.session.add(models.Message(data['picture'], data['name'], data['msg']))
             models.db.session.commit()
             
             socketio.emit('all msgs', {
@@ -210,7 +208,7 @@ def on_new_msg(data):
             response = requests.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + data['google_user_token'])
             json=response.json()
             bot = bot_msg(data['msg'])
-            bot = bot + json['name']
+            bot = bot + data['name']
             all_msgs.append({
             'name':" cat.bot",
             'picture':"https://f4.bcbits.com/img/a2219945996_16.jpg",
