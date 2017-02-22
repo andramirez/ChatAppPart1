@@ -28,10 +28,6 @@ export class Content extends React.Component {
           });
       })
   }
-  
-    msgs = this.state.msgs.map(
-            (n, index) => <div key = {index}  id="text1"><img src={n.picture}/><b>{n.name}:</b>{n.msgs}</div>
-    );
     
   render() {
     
