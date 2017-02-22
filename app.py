@@ -30,9 +30,9 @@ def index():
 @socketio.on('connect')
 def on_connect():
     print 'Someone connected'
-    Socket.emit('new msg', {
-        'msg': '!! welcomeMessage' 
-    });
+    # Socket.emit('new msg', {
+    #     'msg': '!! welcomeMessage' 
+    # });
     # if "cat.bot" not in all_users['users']:
     #     all_users.append({
     #     'users': "cat.bot"
